@@ -81,8 +81,8 @@ CREATE TABLE IF NOT EXISTS contest_type(
 -- INSERT INTO tablename VALUES (x, y, z); -- ughhh syntax?? lol
 
 -- Should consider using a file with all the state names and abbreviations like so:
-LOAD DATA LOCAL INFILE '/path/states.txt' INTO TABLE state;
--- OR if using windows with \r\n endlines use this additional line (make sure to remove ; from first line of command)
+-- OR if using windows with \r\n endlines use the additional line
+LOAD DATA LOCAL INFILE '/path/states.data' INTO TABLE state
 LINES TERMINATED BY '\r\n';
 -- example data would look like this:
 -- Oregon OR
@@ -91,19 +91,50 @@ LINES TERMINATED BY '\r\n';
 INSERT INTO state(name, abbreviation)
 	VALUES([inputName], [inputAbbreviation]); -- can comma separate additional rows if the LOAD DATA doesn't work and prepopulate
 
+-- Mass loading of party
+LOAD DATA LOCAL INFILE '/path/party.data' INTO TABLE party
+LINES TERMINATED BY '\r\n';
 
-INSERT INTO party
+-- Query for use on site
+INSERT INTO party(name)
+	VALUES([inputName]);
+
+-- Mass loading of party
+LOAD DATA LOCAL INFILE '/path/contest_type.data' INTO TABLE contest_type
+LINES TERMINATED BY '\r\n';
 
 INSERT INTO contest_type
+	VALUES([inputTypeName]);
 
+
+-- Load candidate information from file
+LOAD DATA LOCAL INFILE '/path/candidate.data' INTO TABLE candidate
+LINES TERMINATED BY '\r\n';
+
+-- Query for use on site
 INSERT INTO candidate
+	values([inputFname], [inputLname], [inputPartyId]);
+
+
+-- Load candidate information from file
+LOAD DATA LOCAL INFILE '/path/contest.data' INTO TABLE contest
+LINES TERMINATED BY '\r\n';
 
 INSERT INTO contest
+	values([inputDate], [inputState], [inputParty], [intputContestType]);
 
 
--- Delete a row from various tables
+
+-- Load voting details from file
+LOAD DATA LOCAL INFILE '/path/contest_candidate.data' INTO TABLE contest_candidate
+LINES TERMINATED BY '\r\n';
+
+-- Query for site
+INSERT INTO contest_candidate
+	values([inputCandidateId], [inputContestId], [inputVoteCount], [inputDelegateCount]);
 
 
+-- Delete a row from various tables ... double check requirements, I think if we do aggregate functions then not required.
 
 -- Some queries to do
 
