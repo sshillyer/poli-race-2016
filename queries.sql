@@ -9,25 +9,36 @@ FROM
 INNER JOIN
 	`party` AS p ON c.party_id=p.id
 WHERE
-	'Candidate'=[inputFullName]
-;
+  CONCAT(`fname`, ' ', `lname`)=[inputFullName]
+; -- TESTED: WORKS
+-- OUTPUT:
+-- Candidate	name
+-- Jeb Busch	Republican
+
+
 
 -- Get the details on all of the contests in one table
 -- This should select the date, state, party, and contest types for 
 -- all of the contests. Could filter the results easily by adding a
 -- WHERE statement. For example, WHERE state.id=userinput
 SELECT
-	contest.date as 'Date',
+	contest.contest_date as 'Date',
 	state.name as 'State',
 	party.name as `Party`,
 	type.name as `Contest Type`
+FROM
+  contest
 INNER JOIN
 	state ON state.id=contest.state_id
 INNER JOIN
 	party ON party.id=contest.party_id
 INNER JOIN
 	contest_type AS type ON type.id=contest.contest_type_id
-;
+; -- TESTED: Working
+-- OUTPUT:
+-- contest_date	name	name	name
+-- December, 31 2016 00:00:00	Oregon	Republican	Caucus
+-- January, 15 2016 00:00:00	California	Democrat	Primary
 
 -- Possible "filters" to apply:
 -- All contests (typically just 2?) for a particular state
@@ -58,13 +69,16 @@ INNER JOIN
 	ON p.id=c.party_id
 INNER JOIN
 	contest_candidate AS details
-	ON details.candidate_id=candidate.id
-GROUP BY
-	details.candidate_id
+	ON details.candidate_id=c.id
 WHERE
-	'Candidate'=[inputFullName]  -- Where clause might need to be before the group by clause??
+	CONCAT(c.`fname`, ' ', c.`lname`)=[inputFullName]
+GROUP BY
+	details.candidate_id  -- Where clause might need to be before the group by clause??
+;
+
+-- Perhaps sort like so instead of where for another query
 ORDER BY
-	`Total Votes`, `Total Delegates`
+	`Total Votes`, `Total Delegates` DESC
 
 
 
