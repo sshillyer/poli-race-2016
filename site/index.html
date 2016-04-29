@@ -1,0 +1,173 @@
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Political Race 2016 - Database Admin Tool</title>
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>
+</head>
+
+    
+<body>
+    <h1>Add Data into Tables</h1>
+    <form action="php/insert-state.php">
+    <!-- This form calls the following SQL command:
+    INSERT INTO state(name, abbreviation)
+        VALUES([inputName], [inputAbbreviation]);
+    -->
+        <fieldset>
+        <legend>Insert into `state`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_state_name">State (e.g. "Oregon")</label></td>
+                    <td><input id="input-state-name" type="text" name="input_state_name"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_state_abbr">2-Letter Abbreviation (e.g. "OR")</label></td>
+                    <td><input id="input-state-abbr" type="text" name="input_state_abbr"></td>
+                </tr>
+            </table>
+            <p><input type="submit" value="Add state to database"></p>
+        </fieldset>
+    </form> <!-- End state form -->
+    
+    <form action="php/insert-party.php">
+    <!-- This form calls the following SQL command:
+    INSERT INTO party(name)
+        VALUES([inputName]);
+    -->
+        <fieldset>
+        <legend>Insert into `party`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_party_name">Party Name:</label></td>
+                    <td><input id="input-party-name" type="text" name="input_party_name"></td>
+                </tr>
+            </table>
+            <p><input type="submit" value="Add party to database"></p>            
+        </fieldset>
+    </form> <!-- End party form -->
+    
+    <form action="php/insert-contest-type.php">
+    <!-- This form calls the following SQL command:
+    INSERT INTO contest_type(name)
+        VALUES([inputTypeName]);
+    -->
+        <fieldset>
+        <legend>Insert into `contest_type`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_contest_type">Contest Type:</label></td>
+                    <td><input id="input-contest-type" type="text" name="input_contest_type"></td>
+                </tr>
+            </table>
+            <p><input type="submit" value="Add contest_type to database"></p>        
+        </fieldset>
+    </form> <!-- End contest-type form -->
+    
+    <form action="php/insert-candidate.php">
+    <!-- This form calls the following SQL command:
+INSERT INTO candidate(fname, lname, party_id)
+	VALUES([inputFname], [inputLname], 
+		(SELECT p.id FROM party AS p WHERE p.name=[inputPartyName])
+	);
+    -->
+        <fieldset>
+        <legend>Insert into `candidate`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_candidate_fname">First Name: </label></td>
+                    <td><input id="input-candidate-fname" type="text" name="input_candidate_fname"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_candidate_lname">Last Name: </label></td>
+                    <td><input id="input-candidate-lname" type="text" name="input_candidate_lname"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_candidate_party">Party: </label></td>
+                    <td><input id="input-candidate-party" type="text" name="input_candidate_party"></td>
+                </tr>                
+            </table>
+            <p><input type="submit" value="Add candidate to database"></p>        
+        </fieldset>
+    </form> <!-- End candidate form -->
+    
+    
+    <form action="php/insert-contest.php">
+    <!-- This form calls the following SQL command:
+INSERT INTO contest(contest_date, state_id, party_id, contest_type_id)
+	VALUES
+		(	[inputContestDate], 
+			(SELECT id FROM state WHERE state.name=[inputContestState]), 
+			(SELECT id FROM party WHERE party.name=[inputContestParty]),
+			(SELECT id FROM contest_type WHERE contest_type.name=[inputContestType]) 
+		);
+    -->
+        <fieldset>
+        <legend>Insert into `contest`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_contest_date">Contest Date: </label></td>
+                    <td><input id="input-contest-date" type="date" name="input_contest_date"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_contest_state">State: </label></td>
+                    <td><input id="input-contest-state" type="text" name="input_contest_state"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_contest_party">Party: </label></td>
+                    <td><input id="input-contest-party" type="text" name="input_contest_party"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_contest_contest_type">Contest Type: </label></td>
+                    <td><input id="input-contest-contest-type" type="text" name="input_contest_contest_type"></td>
+                </tr>                
+            </table>
+            <p><input type="submit" value="Add contest to database"></p>        
+        </fieldset>
+    </form> <!-- End insert contest -->
+    
+    <form action="php/insert-contest-candidate.php">
+    <!-- This form calls the following SQL command:
+INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count)
+	VALUES
+	(	(SELECT id FROM candidate WHERE candidate.fname=[inputFName] AND candidate.lname=[inputLName]),
+		(SELECT id FROM contest 
+			WHERE contest.state_id=(SELECT id FROM state WHERE state.name=[inputState])
+				AND 
+			contest.party_id=(SELECT id FROM party WHERE party.name=[inputParty])
+		),
+		[inputVoteCount],
+		[inputDelegateCount]);
+    -->
+        <fieldset>
+        <legend>Insert into `contest_candidate`</legend>
+            <table>
+                <tr>
+                    <td><label for="input_contest_candidate_fname">Candidate First Name</label></td>
+                    <td><input id="input-contest-candidate-fname" type="text" name="input_contest_candidate_fname"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_contest_candidate_lname">Candidate Last Name</label></td>
+                    <td><input id="input-contest-candidate-lname" type="text" name="input_contest_candidate_lname"></td>                </tr>
+                <tr>
+                    <td><label for="input_contest_candidate_state">State: </label></td>
+                    <td><input id="input-contest-candidate_state" type="text" name="input_contest_candidate_state"></td>
+                </tr>
+                <tr>
+                    <td><label for="input_contest_candidate_votes">Votes: </label></td>
+                    <td><input id="input-contest-candidate-votes" type="number" name="input_contest_candidate_votes"></td>
+                </tr>                
+                <tr>
+                    <td><label for="input_contest_candidate_delegates">Delegates: </label></td>
+                    <td><input id="input-contest-candidate-delegates" type="number" name="input_contest_candidate_delegates"></td>
+                </tr>                                
+            </table>
+            <p><input type="submit" value="Add contest to database"></p>        
+        </fieldset>
+    </form> <!-- End insert contest_candidate -->
+    
+</body>
+
+</html>
