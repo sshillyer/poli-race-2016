@@ -8,6 +8,8 @@ $contest_type = $_POST['input_contest_type'];
 //    VALUES([$contest_type]);
 
 echo '<p>Hello from insert-contest-type.php</p>';
-
+echo '<p>Received the following variables:<p><ul>';
+echo "<li>contest_type: $contest_type </li>";
+echo '</ul>';
 >
     

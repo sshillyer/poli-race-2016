@@ -10,6 +10,13 @@ $candidate_party = $_POST['input_candidate_party'];
 //  VALUES([$candidate_fname], [$candidate_lname], 
 //  (SELECT p.id FROM party AS p WHERE p.name=[$candidate_party])
 
-echo '<p>Hello from insert-candidate.php</p>';
+echo '<p>Hello from insert-candidate.php';
+echo '<p>Received the following variables:<p><ul>';
+echo "<li>candidate_fname: $candidate_fname.</li>";
+echo "<li>candidate_lname: $candidate_lname.</li>";
+echo "<li>candidate_party: $candidate_party.</li>";
+echo '</ul>';
+
+// echo "<li> </li>";
 
 >

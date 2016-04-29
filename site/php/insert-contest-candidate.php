@@ -21,5 +21,12 @@ $contest_delegates = $_POST['input_contest_candiate_delegates'];
 //		[inputDelegateCount]);
 
 echo '<p>Hello from insert-contest.php</p>';
-
+echo '<p>Received the following variables:<p><ul>';
+echo "<li>candidate_fname: $candidate_fname</li>";
+echo "<li>candidate_lname: $candidate_lname</li>";
+echo "<li>contest_state: $contest_state</li>";
+echo "<li>contest_type: $contest_type</li>";
+echo "<li>contest_votes: $contest_votes</li>";
+echo "<li>contest_delegates: $contest_delegates</li>";
+echo '</ul>';
 >

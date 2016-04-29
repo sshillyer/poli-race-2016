@@ -16,5 +16,10 @@ $contest_type = $_POST['input_contest_contest_type'];
 //		);
 
 echo '<p>Hello from insert-contest.php</p>';
-
+echo '<p>Received the following variables:<p><ul>';
+echo "<li>contest_date: $contest_date</li>";
+echo "<li>contest_state: $contest_state</li>";
+echo "<li>contest_party: $contest_party</li>";
+echo "<li>contest_type: $contest_type</li>";
+echo '</ul>';
 >

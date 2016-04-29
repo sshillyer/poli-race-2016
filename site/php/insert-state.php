@@ -12,6 +12,9 @@ $state_abbrev = $_POST['input_state_abbr'];
 //    VALUES([$state_name], [$state_abbrev]);
 
 echo '<p>Hello from insert-state.php</p>';
-
+echo '<p>Received the following variables:<p><ul>';
+echo "<li>state_name: $state_name</li>";
+echo "<li>state_abbrev: $state_abbrev</li>";
+echo '</ul>';
 >
     
