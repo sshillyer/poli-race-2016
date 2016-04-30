@@ -31,7 +31,7 @@ CREATE TABLE IF NOT EXISTS candidate(
 	party_id INT(11) NOT NULL, -- NOT NULL; foreign key, references party.id	
 	FOREIGN KEY fk_party_id(party_id) REFERENCES party(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE
+		ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
 -- The type of contest that's held for a specific political party in a specific state. e.g. caucus | primary
@@ -51,13 +51,13 @@ CREATE TABLE IF NOT EXISTS contest(
 	contest_type_id INT(11) NOT NULL, 
 	FOREIGN KEY fk_state_id(state_id) REFERENCES state(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE,
+		ON DELETE RESTRICT,
 	FOREIGN KEY fk_party_id(party_id) REFERENCES party(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE,
+		ON DELETE RESTRICT,
 	FOREIGN KEY fk_contest_type_id(contest_type_id) REFERENCES contest_type(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE
+		ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
 -- Results (votes, delegates) for a specific candidate at a specific event.
@@ -69,10 +69,10 @@ CREATE TABLE IF NOT EXISTS contest_candidate(
 	delegate_count INT(11) DEFAULT NULL,
 	FOREIGN KEY fk_candidate_id(candidate_id) REFERENCES candidate(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE,
+		ON DELETE RESTRICT,
 	FOREIGN KEY fk_contest_id(contest_id) REFERENCES contest(id)
 		ON UPDATE CASCADE
-		ON DELETE CASCADE
+		ON DELETE RESTRICT
 ) ENGINE=InnoDB;
 
 
@@ -98,4 +98,3 @@ LINES TERMINATED BY '\r\n';
 
 LOAD DATA LOCAL INFILE '/path/contest_candidate.data' INTO TABLE contest_candidate
 LINES TERMINATED BY '\r\n';
-
