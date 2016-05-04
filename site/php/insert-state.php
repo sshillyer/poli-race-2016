@@ -20,13 +20,13 @@ echo '</ul>'
 define('STATE_MIN', 3)
 if (strlen($state_name) < STATE_MIN) {
 	echo '<p>State name must be exactly '.STATE_MIN.' letters long.</p>';
-	echo '<p><a href="../index.html">Back to Data Entry Page</a></p>';
+	insert_button("../index.html", "Back");
 }
 
 // Validate that abbreviation is exactly two characters long
 if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 	echo '<p>Abbreviation must be exactly '.ABBREV_LENGTH.' letters (No numbers, spaces, or special characters allowed).</p>';
-	exit;
+	insert_button("../index.html", "Back");
 }
 
 else {
