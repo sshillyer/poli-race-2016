@@ -1,4 +1,5 @@
 <?php
+require_once( 'helpers.php' );
 
 // Extract the post variables
 $party_name = trim($_POST['input_party_name']);
