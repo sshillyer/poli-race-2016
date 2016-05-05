@@ -1,4 +1,5 @@
 <?php
+require_once( 'helpers.php' );
 
 // Extract the post variables
 $candidate_fname = trim($_POST['input_candidate_fname']);

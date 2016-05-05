@@ -1,4 +1,5 @@
 <?php
+require_once( 'helpers.php' );
 
 // Extract the post variables
 $contest_type = trim($_POST['input_contest_type']);
