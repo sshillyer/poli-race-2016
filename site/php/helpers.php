@@ -14,4 +14,4 @@ function insert_button($url, $label, $style='default') {
 
 
 
->
+?>

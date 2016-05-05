@@ -15,5 +15,4 @@ echo '</ul>'
 //    VALUES([$contest_type]);
 
 
->
-    
+?>

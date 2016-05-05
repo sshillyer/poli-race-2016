@@ -28,4 +28,4 @@ echo '</ul>'
 //		[$contest_votes],
 //		[$contest_delegates]);
 
->
+?>
