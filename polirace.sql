@@ -17,14 +17,14 @@ CREATE TABLE IF NOT EXISTS state (
 
 -- e.g. democrat, republican, etc.
 -- allows us to even put in candidates that are not demo/repub which just aren't associated with any contests
-CREATE TABLE IF NOT EXISTS party(
+CREATE TABLE IF NOT EXISTS party (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	UNIQUE(name)
 ) ENGINE=InnoDB;
 
 -- Political candidates names and parties
-CREATE TABLE IF NOT EXISTS candidate(
+CREATE TABLE IF NOT EXISTS candidate (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY, -- primary key, auto increment, NOT NULL
 	fname VARCHAR(255) NOT NULL, -- NOT NULL
 	lname VARCHAR(255) NOT NULL, -- NOT NULL
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS candidate(
 ) ENGINE=InnoDB;
 
 -- The type of contest that's held for a specific political party in a specific state. e.g. caucus | primary
-CREATE TABLE IF NOT EXISTS contest_type(
+CREATE TABLE IF NOT EXISTS contest_type (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	name VARCHAR(255) NOT NULL,
 	UNIQUE(name)
@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS contest_type(
 
 
 -- we could change contest to "contest" and contest_type back to "contest_type" table names??
-CREATE TABLE IF NOT EXISTS contest(
+CREATE TABLE IF NOT EXISTS contest (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	contest_date DATE,
 	state_id INT(11) NOT NULL,
@@ -57,7 +57,7 @@ CREATE TABLE IF NOT EXISTS contest(
 ) ENGINE=InnoDB;
 
 -- Results (votes, delegates) for a specific candidate at a specific event.
-CREATE TABLE IF NOT EXISTS contest_candidate(
+CREATE TABLE IF NOT EXISTS contest_candidate (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	candidate_id INT(11) NOT NULL,
 	contest_id INT(11) NOT NULL, 
