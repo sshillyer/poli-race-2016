@@ -25,8 +25,8 @@ echo '</ul>'
 
 
 define('STATE_MIN', 3)
-if (strlen($state_name) < STATE_MIN) {
-	echo '<p>State name must be exactly '.STATE_MIN.' letters long.</p>';
+if (strlen($state_name) < STATE_MIN) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
+	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
 	insert_button("../index.html", "Back");
 }
 
@@ -57,16 +57,17 @@ else {
 		exit;
 	}
 
-	// Attempt to insert new state using this query:
-
+	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO state(name, abbreviation) VALUES(?, ?)';
 	$stmt = $db->prepare($query);
 	$stmt->bind_param('ss', $state_name, $state_abbrev);
 	$stmt->execute();
-	echo '<p>'.$db->affected_rows.' state added to database.</p>';
-	
-	// Process resuls shere
 
+	// Process resuls shere
+	echo '<p>'.$db->affected_rows.' state added to database.</p>';
+	$stmt->close(); // Might be able to move this to right after the ->execute() call??
+
+	
 	// Close resources and close connection
 	$result->free();
 	$db->close();
