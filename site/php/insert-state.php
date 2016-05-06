@@ -28,12 +28,14 @@ define('STATE_MIN', 3)
 if (strlen($state_name) < STATE_MIN) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
 	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
 	insert_button("../index.html", "Back");
+	exit;
 }
 
 // Validate that abbreviation is exactly two characters long
 if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 	echo '<p>Abbreviation must be exactly '.ABBREV_LENGTH.' letters (No numbers, spaces, or special characters allowed).</p>';
 	insert_button("../index.html", "Back");
+	exit;
 }
 
 
@@ -44,7 +46,7 @@ else {
 	
 	// Add slashes if needed
 	if (!get_magic_quotes_gpc(oid)) {
-		$state_name = addslashes(($state_name));
+		$state_name = addslashes($state_name);
 		$state_abbrev = addslashes($state_abbrev);
 	}
 
@@ -54,6 +56,7 @@ else {
 	if (mysqli_connect_errno()) {
 		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
 		// TODO: probably print a button here to go back to insert page then exit
+		insert_button("../index.html", "Back");
 		exit;
 	}
 
