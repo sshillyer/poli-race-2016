@@ -1,9 +1,15 @@
 <?php
 require_once( 'helpers.php' );
+require("sql/Page.php");
+
+$page = new Page();
 
 
 // TODO: Look into seeing if we need to use addslashes() on the variables like this:
 // $state_name = addslashes(trim($_POST['input_state_name']));
+
+// If embedding any 'quotes' then \'escape them\' !!!!
+$page->content = ''; // I think need to embed everything from here to END_EMBED comment
 
 // Extract the post variables and do some basic formatting
 $state_name = trim($_POST['input_state_name']);  // trim whitespace
@@ -17,6 +23,7 @@ foreach ($_POST as $input) {
 echo '</ul>'
 // END DEBUG ECHO
 
+
 define('STATE_MIN', 3)
 if (strlen($state_name) < STATE_MIN) {
 	echo '<p>State name must be exactly '.STATE_MIN.' letters long.</p>';
@@ -29,31 +36,45 @@ if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 	insert_button("../index.html", "Back");
 }
 
-if (!get_magic_quotes_gpc(oid)) {
-	$state_name = addslashes(($state_name));
-	$state_abbrev = addslashes($state_abbrev);
-}
 
 else {
 	// Connect to database (Cite Listing 11.2 of PHP & Mysql 4th ed.)
 	// TODO: refactor into a function so we can reuse across all pages easily
 	//   I think we need to pass in the table name and the query and return the result from the query() call
-	$db = new mysqli('serverhost', 'username', 'password', 'table');
 	
-	if (mysqli_connect_errno()) {
-		echo 'Error: Could not connect to the database. Please try again later.';
+	// Add slashes if needed
+	if (!get_magic_quotes_gpc(oid)) {
+		$state_name = addslashes(($state_name));
+		$state_abbrev = addslashes($state_abbrev);
 	}
 
-	// Attempt to insert new state
-	//INSERT INTO state(name, abbreviation)
-	//    VALUES([$state_name], [$state_abbrev]);
+	// the @ sign is the error suppressino operator, so we can gracefully handle exceptions
+	@ $db = new mysqli('serverhost', 'username', 'password', 'db-name');
+	
+	if (mysqli_connect_errno()) {
+		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
+		// TODO: probably print a button here to go back to insert page then exit
+		exit;
+	}
 
-	$query = "INSERT INTO state(name, abbreviation) VALUES(".$state_name.", ".$state_abbrev.");";
-	$result = $db->query($query);
+	// Attempt to insert new state using this query:
 
+	$query = 'INSERT INTO state(name, abbreviation) VALUES(?, ?)';
+	$stmt = $db->prepare($query);
+	$stmt->bind_param('ss', $state_name, $state_abbrev);
+	$stmt->execute();
+	echo '<p>'.$db->affected_rows.' state added to database.</p>';
+	
+	// Process resuls shere
+
+	// Close resources and close connection
+	$result->free();
+	$db->close();
 }
+// END_EMBED
 
 
-
+$page->$header = 'Insert Records into Database';
+$page->Display();
 
 ?>
