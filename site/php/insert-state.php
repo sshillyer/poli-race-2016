@@ -29,11 +29,28 @@ if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 	insert_button("../index.html", "Back");
 }
 
-else {
-	// Attempt to insert new state
+if (!get_magic_quotes_gpc(oid)) {
+	$state_name = addslashes(($state_name));
+	$state_abbrev = addslashes($state_abbrev);
+}
 
+else {
+	// Connect to database (Cite Listing 11.2 of PHP & Mysql 4th ed.)
+	// TODO: refactor into a function so we can reuse across all pages easily
+	//   I think we need to pass in the table name and the query and return the result from the query() call
+	$db = new mysqli('serverhost', 'username', 'password', 'table');
+	
+	if (mysqli_connect_errno()) {
+		echo 'Error: Could not connect to the database. Please try again later.';
+	}
+
+	// Attempt to insert new state
 	//INSERT INTO state(name, abbreviation)
 	//    VALUES([$state_name], [$state_abbrev]);
+
+	$query = "INSERT INTO state(name, abbreviation) VALUES(".$state_name.", ".$state_abbrev.");";
+	$result = $db->query($query);
+
 }
 
 

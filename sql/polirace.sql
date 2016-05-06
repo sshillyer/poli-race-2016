@@ -95,3 +95,15 @@ LINES TERMINATED BY '\r\n';
 
 LOAD DATA LOCAL INFILE '/path/contest_candidate.data' INTO TABLE contest_candidate
 LINES TERMINATED BY '\r\n';
+
+
+-- --------------------------------------------------------------------------------------------------
+-- Grant access to a web user for use on the site
+-- --------------------------------------------------------------------------------------------------
+
+GRANT
+	select, insert, delete, update
+ON
+	databasename.*
+TO
+	username IDENTIFIED BY `password`;
