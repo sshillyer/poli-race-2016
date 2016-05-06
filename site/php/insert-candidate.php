@@ -16,9 +16,9 @@ echo '<p>Hello from insert-candidate.php</p><ul>'
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
+echo '</ul>';
 
 // Validate the input (make sure it's at least, say, 3 characters for first and last name)
-
 if (false) {
 	// change false to whatever validation we wanted to look for
 }
@@ -51,7 +51,6 @@ else {
 	// Process resuls shere
 	echo '<p>'.$db->affected_rows.' candidate added to database.</p>';
 	$stmt->close(); // Might be able to move this to right after the ->execute() call??
-
 	
 	// Close resources and close connection
 	$result->free();
@@ -59,7 +58,7 @@ else {
 }
 
 
-$page->$header = 'Insert Records into Database';
+$page->$header = 'Insert Candidate into Database';
 $page->Display();
 
 

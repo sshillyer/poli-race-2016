@@ -4,12 +4,9 @@ require("sql/Page.php");
 
 $page = new Page();
 
-
-// TODO: Look into seeing if we need to use addslashes() on the variables like this:
-// $state_name = addslashes(trim($_POST['input_state_name']));
-
 // If embedding any 'quotes' then \'escape them\' !!!!
 $page->content = ''; // I think need to embed everything from here to END_EMBED comment
+
 
 // Extract the post variables and do some basic formatting
 $state_name = trim($_POST['input_state_name']);  // trim whitespace
@@ -20,7 +17,7 @@ echo '<p>Hello from insert-state.php</p><ul>'
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
-echo '</ul>'
+echo '</ul>';
 // END DEBUG ECHO
 
 
@@ -78,7 +75,7 @@ else {
 // END_EMBED
 
 
-$page->$header = 'Insert Records into Database';
+$page->$header = 'Insert State into Database';
 $page->Display();
 
 ?>
