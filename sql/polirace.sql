@@ -1,10 +1,6 @@
 -- TODO:
 --  * Indices where needed
 
--- --------------------------------------------------------------------------------------------------
--- Create the database
--- --------------------------------------------------------------------------------------------------
-CREATE DATABASE IF NOT EXISTS poli_race_2016;
 
 -- --------------------------------------------------------------------------------------------------
 --  Create the tables for the database
@@ -69,13 +65,16 @@ CREATE TABLE IF NOT EXISTS contest_candidate (
 	FOREIGN KEY fk_candidate_id(candidate_id) REFERENCES candidate(id)
 		ON DELETE RESTRICT,
 	FOREIGN KEY fk_contest_id(contest_id) REFERENCES contest(id)
-		ON DELETE RESTRICT
+		ON DELETE RESTRICT,
+	UNIQUE(candidate_id, contest_id)
 ) ENGINE=InnoDB;
 
 
 
 -- --------------------------------------------------------------------------------------------------
 --  Pre-load data from file
+-- NOTE: Only use once we have created the files and stored them in some path (which should be
+-- updated)
 -- --------------------------------------------------------------------------------------------------
 
 LOAD DATA LOCAL INFILE '/path/states.data' INTO TABLE state
@@ -101,9 +100,4 @@ LINES TERMINATED BY '\r\n';
 -- Grant access to a web user for use on the site
 -- --------------------------------------------------------------------------------------------------
 
-GRANT
-	select, insert, delete, update
-ON
-	databasename.*
-TO
-	username IDENTIFIED BY `password`;
+GRANT select, insert, delete, update ON hillyers-db.* TO webuser IDENTIFIED BY `password123`;

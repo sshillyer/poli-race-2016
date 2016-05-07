@@ -18,7 +18,7 @@ $contest_party = trim($_POST['input_contest_candidate_party']);
 $contest_votes = trim($_POST['input_contest_candidate_votes']);
 $contest_delegates = trim($_POST['input_contest_candiate_delegates']);
 
-echo '<p>Hello from insert-contest-candidate.php</p><ul>'
+echo '<p>Hello from insert-contest-candidate.php</p><ul>';
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
@@ -46,7 +46,7 @@ else {
 	if (mysqli_connect_errno()) {
 		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
 		// TODO: probably print a button here to go back to insert page then exit
-		insert_button("../index.html", "Back");
+		insert_button("../index.php", "Back");
 		exit;
 	}
 

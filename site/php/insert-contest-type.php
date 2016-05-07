@@ -12,7 +12,7 @@ $page->content = ''; // I think need to embed everything from here to END_EMBED 
 // Extract the post variables
 $contest_type = trim($_POST['input_contest_type']);
 
-echo '<p>Hello from insert-contest-type.php</p><ul>'
+echo '<p>Hello from insert-contest-type.php</p><ul>';
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
@@ -35,7 +35,7 @@ else {
 	if (mysqli_connect_errno()) {
 		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
 		// TODO: probably print a button here to go back to insert page then exit
-		insert_button("../index.html", "Back");
+		insert_button("../index.php", "Back");
 		exit;
 	}
 

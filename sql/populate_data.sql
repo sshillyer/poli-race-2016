@@ -54,15 +54,8 @@ INSERT INTO contest(contest_date, state_id, party_id, contest_type_id)
 -- --------------------------------------------------------------------------------------------------
 -- Need to test this one again, there was some missing logic
 -- Also, might be wise to make the lookupg for contest_id an inner join instead of subqueries... tired, so not sure
-INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count)
-	VALUES
-	(	(SELECT id FROM candidate WHERE candidate.fname="Jeb" AND candidate.lname="Busch"),
-		(SELECT id FROM contest 
-			WHERE contest.state_id=(SELECT id FROM state WHERE state.name="California")
-				AND 
-			contest.party_id=(SELECT id FROM party WHERE party.name="Republican")
-		),
-		10,
-		NULL
-	)
-;
+INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count) 
+VALUES ((SELECT id FROM candidate WHERE candidate.fname="Jeb" AND candidate.lname="Busch"), 
+(SELECT id FROM contest WHERE contest.state_id=(SELECT id FROM state WHERE state.name="Oregon") AND contest.party_id=(SELECT id FROM party WHERE party.name="Republican")),
+ 10, 
+ 0);

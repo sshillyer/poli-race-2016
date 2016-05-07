@@ -5,7 +5,7 @@
 	$page = new Page();
 
 	$page->content = '        <div class="row">
-            <form action="php/insert-state.php" role="form">
+            <form action="php/insert-state.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO state(name, abbreviation)
                 VALUES([inputName], [inputAbbreviation]);
@@ -23,7 +23,7 @@
             </form> <!-- End state form -->
         </div>
         <div class="row">    
-            <form action="php/insert-party.php" role="form">
+            <form action="php/insert-party.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO party(name)
                 VALUES([inputName]);
@@ -39,7 +39,7 @@
             </form> <!-- End party form -->
         </div>
         <div class="row">            
-            <form action="php/insert-contest-type.php" role="form">
+            <form action="php/insert-contest-type.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO contest_type(name)
                 VALUES([inputTypeName]);
@@ -56,7 +56,7 @@
         </div>
 
         <div class="row">
-            <form action="php/insert-candidate.php" role="form">
+            <form action="php/insert-candidate.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO candidate(fname, lname, party_id)
             	VALUES([inputFname], [inputLname], 
@@ -79,7 +79,7 @@
         </div>
 
         <div class="row">            
-            <form action="php/insert-contest.php" role="form">
+            <form action="php/insert-contest.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO contest(contest_date, state_id, party_id, contest_type_id)
             	VALUES
@@ -107,7 +107,7 @@
         </div>
 
         <div class="row">            
-            <form action="php/insert-contest-candidate.php" role="form">
+            <form action="php/insert-contest-candidate.php" role="form" method="post">
             <!-- This form calls the following SQL command:
         INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count)
         	VALUES

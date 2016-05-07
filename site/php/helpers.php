@@ -8,7 +8,7 @@ ini_set('display_errors', 'On');
 // @param {string} lable : Text on the button
 // @param {sring} style : suffix for the bootstrap btn- styles: default | primary | success |  info | warning | etc.
 function insert_button($url, $label, $style='default') {
-	echo '<p><a href="'.$url.'" class="'.$style.'">'.$description.'</a></p>'
+	echo '<p><a href="'.$url.'" class="'.$style.'">'.$label.'</a></p>';
 }		
 
 

@@ -10,7 +10,7 @@ $contest_state = trim($_POST['input_contest_state']);
 $contest_party = trim($_POST['input_contest_party']);
 $contest_type = trim($_POST['input_contest_contest_type']);
 
-echo '<p>Hello from insert-contest.php</p>'
+echo '<p>Hello from insert-contest.php</p>';
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
