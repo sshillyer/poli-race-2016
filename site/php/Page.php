@@ -1,9 +1,11 @@
 <?php
+ini_set('display_errors', 'On');
 
 // Cite: Page 177 of "PHP and MYSQL Web Dev 4th Edition"
 class Page {
 	public $content;
 	public $title = "Political Race 2016 - Database Admin Tool";
+	public $header = "Default Header -- FIX ME!";
 
 	// Public setter function -- much more generic than you'd see in C++/JAVA
 	public function __set($name, $value) {
@@ -12,8 +14,8 @@ class Page {
 
 	public function Display() {
 		// html, head, metadata, and opening body elements
-		echo '<html lang="en">'
-		echo '<head>'
+		echo '<html lang="en">';
+		echo '<head>';
 			$this->DisplayMeta();
 			$this->DisplayTitle();
 			$this->DisplayStyles();
@@ -32,11 +34,11 @@ class Page {
 	}
 
 	public function DisplayTitle() {
-		echo '<title>'.$this->$title.'</title>';
+		echo '<title>'.$this->title.'</title>';
 	}
 
 	public function DisplayMeta() {
-		echo '    <meta charset="utf-8">'
+		echo '    <meta charset="utf-8">';
     	echo '    <meta name="viewport" content="width=device-width, initial-scale=1">';
 	}
 
@@ -50,14 +52,14 @@ class Page {
 
 	public function DisplayHeader() {
 		echo '    <div class="container">';
-		echo '        <h1 class="page-header text-primary">'.$this->$header.'</h1>';
+		echo '        <h1 class="page-header text-primary">'.$this->header.'</h1>';
 	}
 
 	// Rather than echo each line, you can close the php tag, place HTML, and
 	// then reopen the PHP tag at end of function. Makes multiple lines of HTML easier
 	// to edit or copy-paste into a function like this. Careful that syntax all HTML inside
 	public function DisplayFooter() {
-		>
+		?>
 		        <!-- Footer -->
 		        <div class="row">
 		            <footer><p>Copyright 2016 - Shawn S Hillyer & Jason Goldfine-Middleton</p></footer>

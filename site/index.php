@@ -1,6 +1,6 @@
 <?php
     ini_set('display_errors', 'On');
-	require("sql/Page.php");
+	require_once("php/Page.php");
 
 	$page = new Page();
 
@@ -140,7 +140,7 @@
         </div>
         ';
 
-    $page->$header = 'Insert Records into Database';
+    $page->header = 'Insert Records into Database';
     $page->Display();
 
 ?>

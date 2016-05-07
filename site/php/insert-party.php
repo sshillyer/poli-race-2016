@@ -1,5 +1,8 @@
 <?php
+ini_set('display_errors', 'On');
 require_once( 'helpers.php' );
+require_once("php/Page.php");
+
 
 // Extract the post variables
 $party_name = trim($_POST['input_party_name']);

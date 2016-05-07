@@ -1,6 +1,7 @@
 <?php
+ini_set('display_errors', 'On');
 require_once( 'helpers.php' );
-require("sql/Page.php");
+require_once("php/Page.php");
 
 $page = new Page();
 

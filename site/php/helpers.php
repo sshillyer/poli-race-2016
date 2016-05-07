@@ -1,7 +1,7 @@
-// helper functions we can re-use
 <?php
-	// Include any external libraries here using require_once('file.php')
-	// (The idea is we would use this as a single master header file and include only the one we need across all our files)
+ini_set('display_errors', 'On');
+// Include any external libraries here using require_once('file.php')
+// (The idea is we would use this as a single master header file and include only the one we need across all our files)
 
 
 // @param {string} url : Link for href attribute

@@ -1,5 +1,8 @@
 <?php
+ini_set('display_errors', 'On');
 require_once( 'helpers.php' );
+require_once("php/Page.php");
+
 
 // Extract the post variables
 $contest_date = trim($_POST['input_contest_date']);
