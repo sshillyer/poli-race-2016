@@ -44,6 +44,7 @@ CREATE TABLE IF NOT EXISTS contest_type (
 CREATE TABLE IF NOT EXISTS contest (
 	id INT(11) NOT NULL AUTO_INCREMENT PRIMARY KEY,
 	contest_date DATE,
+	delegates INT(11),
 	state_id INT(11) NOT NULL,
 	party_id INT(11) NOT NULL,
 	contest_type_id INT(11) NOT NULL, 
