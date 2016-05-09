@@ -4,9 +4,10 @@ require_once( 'helpers.php' );
 require_once("php/Page.php");
 
 $page = new Page();
+$page->$header = 'Insert Candidate into Database';
 
-// If embedding any 'quotes' then \'escape them\' !!!!
-$page->content = ''; // I think need to embed everything from here to END_EMBED comment
+// Use HEREDOC to assign the php for this particular page to the page's content variable
+// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
 
 // Extract POST variables
 $candidate_fname = trim($_POST['input_candidate_fname']);
@@ -22,9 +23,10 @@ echo '</ul>';
 ////////////////////// END DEBUG ECHO
 
 // Data Validation
-if (!(hasLengthInRange($candidate_fname, 3, 255) && hasLengthInRange($candidate_lname, 3, 255)) {
+define('NAME_MIN', 3);
+if (!(hasLengthInRange($candidate_fname, NAME_MIN, 255) && hasLengthInRange($candidate_lname, NAME_MIN, 255)) {
 	// TODO: Add this 'business' constraint to our write-up
-	echo 'Candidate\'s first and last names must be at least 3 characters long each and no more than 255 characters long.';
+	echo 'Candidate\'s first and last names must be at least ' .$NAME_MIN. ' characters long each and no more than 255 characters long.';
 	insert_button("../index.php", "Back");
 	exit;
 }
@@ -38,12 +40,11 @@ else {
 		$candidate_party = addslashes($candidate_party);
 	}
 
-		// connect to DB -- returns null on failure so we exit
+	// connect to DB -- returns null on failure so we exit
 	if(!($db = connectToDb()))
 		exit;
 
-	// INSERT INTO candidate(fname, lname, party_id)  
-	// VALUES([$candidate_fname], [$candidate_lname], (SELECT p.id FROM party AS p WHERE p.name=[$candidate_party])
+	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO candidate(fname, lname, party_id)  VALUES(?, ?, (SELECT p.id FROM party AS p WHERE p.name=?)';
 	$stmt = $db->prepare($query);
 	$stmt->bind_param('sss', $candidate_fname, $candidate_lname, $candidate_party);
@@ -58,9 +59,7 @@ else {
 	$db->close();	
 }
 
-
-$page->$header = 'Insert Candidate into Database';
-$page->Display();
-
+// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
+// $page->Display();
 
 ?>

@@ -4,6 +4,7 @@ require_once('helpers.php');
 require_once("Page.php");
 
 $page = new Page();
+$page->$header = 'Insert State into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -65,9 +66,7 @@ else {
 	$result->free();
 	$db->close();
 }
-// EOCONTENT; // TODO: Uncomment this one page debugged
-
-// $page->$header = 'Insert State into Database';
+// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
 
 ?>

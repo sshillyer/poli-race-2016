@@ -1,11 +1,11 @@
 <?php
-    ini_set('display_errors', 'On');
-	require_once("php/Page.php");
+ini_set('display_errors', 'On');
+require_once("php/Page.php");
 
-	$page = new Page();
-    
-    // Use HEREDOC syntax to assign content. No need to escape quotes and we can embed php safely
-    $page->content = <<<EOCONTENT
+$page = new Page();
+
+// Use HEREDOC syntax to assign content. No need to escape quotes and we can embed php safely
+$page->content = <<<EOCONTENT
             <div class="row">
             <form action="php/insert-state.php" role="form" method="post">
             <!-- This form calls the following SQL command:
@@ -139,10 +139,10 @@
                     </fieldset>
                 </div>
             </form> <!-- End insert contest_candidate -->
-        </div>
+    </div>
 EOCONTENT;
 
-    $page->header = 'Insert Records into Database';
-    $page->Display();
+$page->header = 'Insert Records into Database';
+$page->Display();
 
 ?>
