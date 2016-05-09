@@ -38,15 +38,9 @@ else {
 		$candidate_party = addslashes($candidate_party);
 	}
 
-	// the @ sign is the error suppression operator, so we can gracefully handle exceptions
-	@ $db = new mysqli('serverhost', 'username', 'password', 'db-name');
-	
-	if (mysqli_connect_errno()) {
-		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
-		// TODO: probably print a button here to go back to insert page then exit
-		insert_button("../index.php", "Back");
+		// connect to DB -- returns null on failure so we exit
+	if(!($db = connectToDb()))
 		exit;
-	}
 
 	// INSERT INTO candidate(fname, lname, party_id)  
 	// VALUES([$candidate_fname], [$candidate_lname], (SELECT p.id FROM party AS p WHERE p.name=[$candidate_party])

@@ -3,8 +3,10 @@
 	require_once("php/Page.php");
 
 	$page = new Page();
-
-	$page->content = '        <div class="row">
+    
+    // Use HEREDOC syntax to assign content. No need to escape quotes and we can embed php safely
+    $page->content = <<<EOCONTENT
+            <div class="row">
             <form action="php/insert-state.php" role="form" method="post">
             <!-- This form calls the following SQL command:
             INSERT INTO state(name, abbreviation)
@@ -138,7 +140,7 @@
                 </div>
             </form> <!-- End insert contest_candidate -->
         </div>
-        ';
+EOCONTENT;
 
     $page->header = 'Insert Records into Database';
     $page->Display();
