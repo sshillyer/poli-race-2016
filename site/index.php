@@ -14,9 +14,9 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `state`</legend>
                         <label for="input_state_name">State (e.g. "Oregon")</label>
-                        <input id="input-state-name" type="text" name="input_state_name" class="form-control">
+                        <input id="input-state-name" type="text" name="input_state_name" class="form-control" required>
                         <label for="input_state_abbr">2-Letter Abbreviation (e.g. "OR")</label>
-                        <input id="input-state-abbr" type="text" name="input_state_abbr" class="form-control">
+                        <input id="input-state-abbr" type="text" name="input_state_abbr" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add state to database" class="form-control">
                     </fieldset>
                 </div>
@@ -32,7 +32,7 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `party`</legend>
                         <label for="input_party_name">Party Name:</label>
-                        <input id="input-party-name" type="text" name="input_party_name" class="form-control">
+                        <input id="input-party-name" type="text" name="input_party_name" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add party to database" class="form-control">
                     </fieldset>
                 </div>
@@ -48,7 +48,7 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest_type`</legend>
                         <label for="input_contest_type">Contest Type:</label>
-                        <input id="input-contest-type" type="text" name="input_contest_type" class="form-control">
+                        <input id="input-contest-type" type="text" name="input_contest_type" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add contest_type to database" class="form-control">
                     </fieldset>
                 </div>
@@ -67,11 +67,11 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `candidate`</legend>
                         <label for="input_candidate_fname">First Name: </label>
-                        <input id="input-candidate-fname" type="text" name="input_candidate_fname" class="form-control">
+                        <input id="input-candidate-fname" type="text" name="input_candidate_fname" class="form-control" required>
                         <label for="input_candidate_lname">Last Name: </label>
-                        <input id="input-candidate-lname" type="text" name="input_candidate_lname" class="form-control">
+                        <input id="input-candidate-lname" type="text" name="input_candidate_lname" class="form-control" required>
                         <label for="input_candidate_party">Party: </label>
-                        <input id="input-candidate-party" type="text" name="input_candidate_party" class="form-control">
+                        <input id="input-candidate-party" type="text" name="input_candidate_party" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add candidate to database" class="form-control">
                     </fieldset>
                 </div>
@@ -93,13 +93,13 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest`</legend>
                         <label for="input_contest_date">Contest Date: </label>
-                        <input id="input-contest-date" type="date" name="input_contest_date" class="form-control">
+                        <input id="input-contest-date" type="date" name="input_contest_date" class="form-control" required>
                         <label for="input_contest_state">State: </label>
-                        <input id="input-contest-state" type="text" name="input_contest_state" class="form-control">
+                        <input id="input-contest-state" type="text" name="input_contest_state" class="form-control" required>
                         <label for="input_contest_party">Party: </label>
-                        <input id="input-contest-party" type="text" name="input_contest_party" class="form-control">
+                        <input id="input-contest-party" type="text" name="input_contest_party" class="form-control" required>
                         <label for="input_contest_contest_type">Contest Type: </label>
-                        <input id="input-contest-contest-type" type="text" name="input_contest_contest_type" class="form-control">
+                        <input id="input-contest-contest-type" type="text" name="input_contest_contest_type" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add contest to database" class="form-control">   
                     </fieldset>
                 </div>
@@ -124,15 +124,15 @@
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest_candidate`</legend>
                         <label for="input_contest_candidate_fname">Candidate First Name</label>
-                        <input id="input-contest-candidate-fname" type="text" name="input_contest_candidate_fname" class="form-control">
+                        <input id="input-contest-candidate-fname" type="text" name="input_contest_candidate_fname" class="form-control" required>
                         <label for="input_contest_candidate_lname">Candidate Last Name</label>
-                        <input id="input-contest-candidate-lname" type="text" name="input_contest_candidate_lname" class="form-control">
+                        <input id="input-contest-candidate-lname" type="text" name="input_contest_candidate_lname" class="form-control" required>
                         <label for="input_contest_candidate_state">State: </label>
-                        <input id="input-contest-candidate_state" type="text" name="input_contest_candidate_state" class="form-control">
+                        <input id="input-contest-candidate_state" type="text" name="input_contest_candidate_state" class="form-control" required>
                         <label for="input_contest_candidate_votes">Votes: </label>
                         <input id="input-contest-candidate-votes" type="number" name="input_contest_candidate_votes" class="form-control">
                         <label for="input_contest_candidate_delegates">Delegates: </label>
-                        <input id="input-contest-candidate-delegates" type="number" name="input_contest_candidate_delegates" class="form-control">
+                        <input id="input-contest-candidate-delegates" type="number" name="input_contest_candidate_delegates" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add Voting Details" class="form-control">
                     </fieldset>
                 </div>
