@@ -41,28 +41,18 @@ if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 	exit;
 }
 
-
-else {
-	// Connect to database (Cite Listing 11.2 of PHP & Mysql 4th ed.)
-	// TODO: refactor into a function so we can reuse across all pages easily
-	//   I think we need to pass in the table name and the query and return the result from the query() call
-	
+// Data is valid - attempt MySQL query
+else {	
 	// Add slashes if needed
 	if (!get_magic_quotes_gpc(oid)) {
 		$state_name = addslashes($state_name);
 		$state_abbrev = addslashes($state_abbrev);
 	}
 
-	// the @ sign is the error suppressino operator, so we can gracefully handle exceptions
-	@ $db = new mysqli('serverhost', 'username', 'password', 'db-name');
-	
-	if (mysqli_connect_errno()) {
-		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
-		// TODO: probably print a button here to go back to insert page then exit
-		insert_button("../index.php", "Back");
+	// connect to DB -- returns null on failure so we exit
+	if(!($db = connectToDb()))
 		exit;
-	}
-
+	
 	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO state(name, abbreviation) VALUES(?, ?)';
 	$stmt = $db->prepare($query);
@@ -72,14 +62,12 @@ else {
 	// Process resuls shere
 	echo '<p>'.$db->affected_rows.' state added to database.</p>';
 	$stmt->close(); // Might be able to move this to right after the ->execute() call??
-
 	
 	// Close resources and close connection
 	$result->free();
 	$db->close();
 }
 // END_EMBED
-
 
 $page->$header = 'Insert State into Database';
 $page->Display();
