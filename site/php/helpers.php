@@ -11,7 +11,15 @@ function insert_button($url, $label, $style='default') {
 	echo '<p><a href="'.$url.'" class="'.$style.'">'.$label.'</a></p>';
 }		
 
-
+// @param {string} str : String to validate length of
+// @param {int} min : Minimum length of string (inclusive)
+// @param {int} max : Maximum length of string (inclusive)
+function hasLengthInRange($str, $min, $max) {
+	$length = strlen($str);
+	if ($length >= $min && $length <= $max)
+		return true;
+	else return false;
+}
 
 
 ?>

@@ -8,23 +8,28 @@ $page = new Page();
 // If embedding any 'quotes' then \'escape them\' !!!!
 $page->content = ''; // I think need to embed everything from here to END_EMBED comment
 
-// Extract the post variables
+// Extract POST variables
 $candidate_fname = trim($_POST['input_candidate_fname']);
 $candidate_lname = trim($_POST['input_candidate_lname']);
 $candidate_party = trim($_POST['input_candidate_party']);
-/* Let's run a SELECT query to populate a dropdown list with valid parties.  Probably wouldn't go in this file though.  This will ensure referential integrity.  */
 
+////////////////////// DEBUG ECHO
 echo '<p>Hello from insert-candidate.php</p><ul>';
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
 echo '</ul>';
+////////////////////// END DEBUG ECHO
 
-// Validate the input (make sure it's at least, say, 3 characters for first and last name)
-if (false) {
-	// change false to whatever validation we wanted to look for
+// Data Validation
+if (!(hasLengthInRange($candidate_fname, 3, 255) && hasLengthInRange($candidate_lname, 3, 255)) {
+	// TODO: Add this 'business' constraint to our write-up
+	echo 'Candidate\'s first and last names must be at least 3 characters long each and no more than 255 characters long.';
+	insert_button("../index.php", "Back");
+	exit;
 }
 
+// Execute MySQL Query
 else {
 	// Add slashes if needed
 	if (!get_magic_quotes_gpc(oid)) {
