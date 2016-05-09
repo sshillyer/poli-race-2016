@@ -24,7 +24,8 @@ echo '</ul>';
 
 // Data Validation
 define('NAME_MIN', 3);
-if (!(hasLengthInRange($candidate_fname, NAME_MIN, 255) && hasLengthInRange($candidate_lname, NAME_MIN, 255)) {
+define('NAME_MAX', 255);
+if (!(hasLengthInRange($candidate_fname, NAME_MIN, NAME_MAX) && hasLengthInRange($candidate_lname, NAME_MIN, NAME_MAX)) {
 	// TODO: Add this 'business' constraint to our write-up
 	echo 'Candidate\'s first and last names must be at least ' .$NAME_MIN. ' characters long each and no more than 255 characters long.';
 	insert_button("../index.php", "Back");
@@ -41,7 +42,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(!($db = connectToDb()))
+	if(($db = connectToDb()) == null)
 		exit;
 
 	// Preload query then fill in the user input (prevents SQL Injection attack)

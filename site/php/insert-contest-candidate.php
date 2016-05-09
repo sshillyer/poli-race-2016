@@ -5,10 +5,10 @@ require_once("php/Page.php");
 
 
 $page = new Page();
+$page->$header = 'Insert Candidate-Contest Data into Database';
 
-// If embedding any 'quotes' then \'escape them\' !!!!
-$page->content = ''; // I think need to embed everything from here to END_EMBED comment
-
+// Use HEREDOC to assign the php for this particular page to the page's content variable
+// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
 
 // Extract the post variables
 $candidate_fname = trim($_POST['input_contest_candidate_fname']);
@@ -21,17 +21,28 @@ $contest_delegates = trim($_POST['input_contest_candiate_delegates']);
  wouldn't go in this file though.  This will ensure referential integrity.  For the candidate we would need
  to be clever since it's split by first and last name. */
 
+
+////////////////////// END DEBUG ECHO
 echo '<p>Hello from insert-contest-candidate.php</p><ul>';
 foreach ($_POST as $input) {
 	echo '<li>$input: '.$input.'</li>';
 }
 echo '</ul>'
+////////////////////// DEBUG ECHO
 
-// Validate the input (make sure it's at least, say, 3 characters for first and last name)
-if (false) {
-	// change false to whatever validation we wanted to look for
+// Data Validation
+// We aren't going to validate much here. A contest-candidate record can
+// attempt to be inserted with bad data, but if the firstname, lastname, state, party name are not
+// found then the database will just return null records for those fields and the insert will fail
+// because we have "NOT NULL" in our table definition. We also allow
+// NULL inserts for the vote_count and delegate_count. We do need to validate
+// that the number of votes is non-negative, though!
+if ($contest_votes < 0 || $contest_delegates < 0) {
+	echo '<p>Cannot have negative votes or delegates. Try again.</p>';
+	exit;	
 }
 
+// Execute MySQL Query
 else {
 	// Add slashes if needed
 	if (!get_magic_quotes_gpc(oid)) {
@@ -43,15 +54,9 @@ else {
 		$contest_delegates = addslashes($contest_delegates);
 	}
 
-	// the @ sign is the error suppressino operator, so we can gracefully handle exceptions
-	@ $db = new mysqli('serverhost', 'username', 'password', 'db-name');
-	
-	if (mysqli_connect_errno()) {
-		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
-		// TODO: probably print a button here to go back to insert page then exit
-		insert_button("../index.php", "Back");
+	// connect to DB -- returns null on failure so we exit
+	if(($db = connectToDb()) == null)
 		exit;
-	}
 
 	// INSERT INTO candidate(fname, lname, party_id)  
 	// VALUES([$candidate_fname], [$candidate_lname], (SELECT p.id FROM party AS p WHERE p.name=[$candidate_party])
@@ -68,13 +73,10 @@ else {
 	$result->free();
 	$db->close();	
 }
+// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
+// $page->Display();
 
-
-$page->$header = 'Insert Contest-Candidate Details into Database';
-$page->Display();
-
-
-// Attempt to insert the new contest_type
+// Query used:
 //INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count)
 //	VALUES
 //	(	(SELECT id FROM candidate WHERE candidate.fname=[$candidate_fname] AND candidate.lname=[$candidate_lname]),
