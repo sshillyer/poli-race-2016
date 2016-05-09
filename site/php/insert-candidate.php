@@ -12,6 +12,7 @@ $page->content = ''; // I think need to embed everything from here to END_EMBED 
 $candidate_fname = trim($_POST['input_candidate_fname']);
 $candidate_lname = trim($_POST['input_candidate_lname']);
 $candidate_party = trim($_POST['input_candidate_party']);
+/* Let's run a SELECT query to populate a dropdown list with valid parties.  Probably wouldn't go in this file though.  This will ensure referential integrity.  */
 
 echo '<p>Hello from insert-candidate.php</p><ul>';
 foreach ($_POST as $input) {
@@ -32,7 +33,7 @@ else {
 		$candidate_party = addslashes($candidate_party);
 	}
 
-	// the @ sign is the error suppressino operator, so we can gracefully handle exceptions
+	// the @ sign is the error suppression operator, so we can gracefully handle exceptions
 	@ $db = new mysqli('serverhost', 'username', 'password', 'db-name');
 	
 	if (mysqli_connect_errno()) {
@@ -49,7 +50,7 @@ else {
 	$stmt->bind_param('sss', $candidate_fname, $candidate_lname, $candidate_party);
 	$stmt->execute();
 
-	// Process resuls shere
+	// Process results here
 	echo '<p>'.$db->affected_rows.' candidate added to database.</p>';
 	$stmt->close(); // Might be able to move this to right after the ->execute() call??
 	

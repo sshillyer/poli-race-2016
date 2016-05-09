@@ -17,6 +17,9 @@ $contest_state = trim($_POST['input_contest_candidate_state']);
 $contest_party = trim($_POST['input_contest_candidate_party']);
 $contest_votes = trim($_POST['input_contest_candidate_votes']);
 $contest_delegates = trim($_POST['input_contest_candiate_delegates']);
+/* Let's run SELECT queries to populate dropdown lists with valid candidates, states, and parties.  Probably
+ wouldn't go in this file though.  This will ensure referential integrity.  For the candidate we would need
+ to be clever since it's split by first and last name. */
 
 echo '<p>Hello from insert-contest-candidate.php</p><ul>';
 foreach ($_POST as $input) {

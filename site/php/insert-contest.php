@@ -9,6 +9,8 @@ $contest_date = trim($_POST['input_contest_date']);
 $contest_state = trim($_POST['input_contest_state']);
 $contest_party = trim($_POST['input_contest_party']);
 $contest_type = trim($_POST['input_contest_contest_type']);
+/* Let's run SELECT queries to populate dropdown lists with valid states, parties, and contest_types.
+  Probably wouldn't go in this file though.  This will ensure referential integrity.  */
 
 echo '<p>Hello from insert-contest.php</p>';
 foreach ($_POST as $input) {
