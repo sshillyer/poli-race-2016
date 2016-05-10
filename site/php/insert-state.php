@@ -15,7 +15,9 @@ $state_abbrev = strtoupper(trim($_POST['input_state_abbr'])); // trim whitespace
 
 // Data validation
 define('STATE_MIN', 3);
-if (!(hasLengthInRange($state_name, STATE_MIN, 255))) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
+$state_name_is_valid = hasLengthInRange($state_name, STATE_MIN, 255));
+
+if (!($state_abbrev_is_valid) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
 	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
 	insert_button("../index.php", "Back");
 	exit;
@@ -24,8 +26,9 @@ if (!(hasLengthInRange($state_name, STATE_MIN, 255))) {  // TODO: Would rather u
 // Validate that abbreviation is exactly two characters long
 define('ABBREV_LENGTH', 2);
 $pattern = '/^[A-Z][A-Z]$/';
-if (preg_match($pattern, $state_abbrev) == false) {
-	echo '<p>$state_abbrev = ' .$state_abbrev.'</p>';
+$state_abbrev_is_valid = preg_match($pattern, $state_abbrev);
+
+if (!$state_abbrev_is_valid) {
 	echo '<p>Abbreviation must be exactly '.ABBREV_LENGTH.' letters (No numbers, spaces, or special characters allowed).</p>';
 	insert_button("../index.php", "Back");
 	exit;

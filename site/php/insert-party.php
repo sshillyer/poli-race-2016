@@ -22,7 +22,9 @@ $party_name = trim($_POST['input_party_name']);
 
 // Data validation
 define('PARTY_MIN', 3);
-if (!(hasLengthInRange($party_name, PARTY_MIN, 255))) {
+$party_name_is_valid = hasLengthInRange($party_name, PARTY_MIN, 255));
+
+if (!($party_name_is_valid) {
 	echo '<p>Party name must be at least '.PARTY_MIN.' letters long.<p>';
 	insert_button("../index.php", "Back");
 	exit;
