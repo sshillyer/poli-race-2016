@@ -4,7 +4,7 @@ require_once( 'helpers.php' );
 require_once("php/Page.php");
 
 $page = new Page();
-$page->$header = 'Insert Party into Database';
+$page->header = 'Insert Party into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -34,7 +34,7 @@ if (!(hasLengthInRange($party_name, PARTY_MIN, 255))) {
 // Execute MySQL Query
 else {	
 	// Add slashes if needed
-	if (!get_magic_quotes_gpc(oid)) {
+	if (!get_magic_quotes_gpc()) {
 		$party_name = addslashes($party_name);
 	}
 

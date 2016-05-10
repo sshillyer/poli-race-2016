@@ -26,16 +26,31 @@ function hasLengthInRange($str, $min, $max) {
 // @return {mysql db connection} $dbConnection: Returns a connection using mysqli
 // Separated out so we can centralize the variables used to connect in a single
 // function and change all connections using one file, error handling, etc.
+// Citation: http://www.pontikis.net/blog/how-to-use-php-improved-mysqli-extension-and-why-you-should
 function connectToDb() {
-	@ $dbConnection =  new mysqli('serverhost', 'username', 'password', 'db-name');
+	ini_set('display_errors', 'On');
+
+	$DBServer = 'oniddb.cws.oregonstate.edu';
+	$DBUser = 'hillyers-db';
+	$DBPass = 'PASSWORD_HERE';
+	$DBName = 'hillyers-db';
+
+	@ $dbConnection =  new mysqli($DBServer, $DBUser, $DBPass, $DBName);
+
 	if (mysqli_connect_errno()) {
-		echo '<p>Error: Could not connect to the database. Please try again later.</p>';
-		// TODO: probably print a button here to go back to insert page then exit
+	    printf("Connect failed: %s\n", mysqli_connect_error());
 		insert_button("../index.php", "Back");
 		return NULL;
 	}
+
+	// if (mysqli_connect_errno()) {
+	// 	echo '<p>Error: Could not connect to the database. Please try again later.</p>';
+	// 	// TODO: probably print a button here to go back to insert page then exit
+	// 	insert_button("../index.php", "Back");
+	// 	return NULL;
+	// }
 	else
-		return dbConnection;
+		return $dbConnection;
 }
 
 ?>

@@ -5,7 +5,7 @@ require_once("php/Page.php");
 
 
 $page = new Page();
-$page->$header = 'Insert Candidate-Contest Data into Database';
+$page->header = 'Insert Candidate-Contest Data into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -45,7 +45,7 @@ if ($contest_votes < 0 || $contest_delegates < 0) {
 // Execute MySQL Query
 else {
 	// Add slashes if needed
-	if (!get_magic_quotes_gpc(oid)) {
+	if (!get_magic_quotes_gpc()) {
 		$candidate_fname = addslashes($candidate_fname);
 		$candidate_lname = addslashes($candidate_lname);
 		$contest_state = addslashes($contest_state);

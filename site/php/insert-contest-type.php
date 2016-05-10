@@ -5,6 +5,7 @@ require_once("php/Page.php");
 
 
 $page = new Page();
+$page->header = 'Insert Candidate into Database';
 
 // If embedding any 'quotes' then \'escape them\' !!!!
 $page->content = ''; // I think need to embed everything from here to END_EMBED comment
@@ -25,7 +26,7 @@ if (false) {
 
 else {
 	// Add slashes if needed
-	if (!get_magic_quotes_gpc(oid)) {
+	if (!get_magic_quotes_gpc()) {
 		$contest_type = addslashes($contest_type);
 	}
 
@@ -53,8 +54,6 @@ else {
 	$db->close();	
 }
 
-
-$page->$header = 'Insert Candidate into Database';
 $page->Display();
 
 

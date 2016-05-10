@@ -4,7 +4,7 @@ require_once('helpers.php');
 require_once("Page.php");
 
 $page = new Page();
-$page->$header = 'Insert State into Database';
+$page->header = 'Insert State into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -12,14 +12,6 @@ $page->$header = 'Insert State into Database';
 // Extract POST variables
 $state_name = trim($_POST['input_state_name']);  // trim whitespace
 $state_abbrev = strtoupper(trim($_POST['input_state_abbr'])); // trim whitespace and convert to uppercase
-
-////////////////////// DEBUG ECHO
-echo '<p>Hello from insert-state.php</p><ul>';
-foreach ($_POST as $input) {
-	echo '<li>$input: '.$input.'</li>';
-}
-echo '</ul>';
-////////////////////// END DEBUG ECHO
 
 // Data validation
 define('STATE_MIN', 3);
@@ -29,12 +21,11 @@ if (!(hasLengthInRange($state_name, STATE_MIN, 255))) {  // TODO: Would rather u
 	exit;
 }
 
-////////////////////////////////////////
-// TESTING COMPLETED UP TO THIS POINT //
-////////////////////////////////////////
-
 // Validate that abbreviation is exactly two characters long
-if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
+define('ABBREV_LENGTH', 2);
+$pattern = '/^[A-Z][A-Z]$/';
+if (preg_match($pattern, $state_abbrev) == false) {
+	echo '<p>$state_abbrev = ' .$state_abbrev.'</p>';
 	echo '<p>Abbreviation must be exactly '.ABBREV_LENGTH.' letters (No numbers, spaces, or special characters allowed).</p>';
 	insert_button("../index.php", "Back");
 	exit;
@@ -43,14 +34,20 @@ if (!ereg('^[[:upper:]][[:upper]]$', $state_abbrev)) {
 // Execute MySQL Query
 else {	
 	// Add slashes if needed
-	if (!get_magic_quotes_gpc(oid)) {
+	if (!get_magic_quotes_gpc()) {
 		$state_name = addslashes($state_name);
 		$state_abbrev = addslashes($state_abbrev);
 	}
 
+////////////////////////////////////////
+// TESTING COMPLETED UP TO THIS POINT //
+////////////////////////////////////////
+
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null)
+	if(($db = connectToDb()) == null) {
+		echo 'Uh oh from line 56';
 		exit;
+	}
 	
 	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO state(name, abbreviation) VALUES(?, ?)';
@@ -59,13 +56,20 @@ else {
 	$stmt->execute();
 
 	// Process results here
-	echo '<p>'.$db->affected_rows.' state added to database.</p>';
-	$stmt->close(); // Might be able to move this to right after the ->execute() call??
+	if ($db->affected_rows >= 0) {
+		echo '<p>'.$db->affected_rows.' state added to database.</p>';	
+	}
+	else {
+		echo '<p>Unable to add state to database - probably already exists.</p>';
+	}
 	
 	// Close resources and close connection
-	$result->free();
+	$stmt->close(); // Might be able to move this to right after the ->execute() call??
 	$db->close();
 }
+
+insert_button("../index.php", "Back");
+
 // EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
 

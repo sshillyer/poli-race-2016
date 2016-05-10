@@ -4,7 +4,7 @@ require_once( 'helpers.php' );
 require_once("php/Page.php");
 
 $page = new Page();
-$page->$header = 'Insert Candidate into Database';
+$page->header = 'Insert Candidate into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -35,7 +35,7 @@ if (!(hasLengthInRange($candidate_fname, NAME_MIN, NAME_MAX) && hasLengthInRange
 // Execute MySQL Query
 else {
 	// Add slashes if needed
-	if (!get_magic_quotes_gpc(oid)) {
+	if (!get_magic_quotes_gpc()) {
 		$candidate_fname = addslashes($candidate_fname);
 		$candidate_lname = addslashes($candidate_lname);
 		$candidate_party = addslashes($candidate_party);
