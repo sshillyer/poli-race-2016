@@ -12,15 +12,16 @@ $page->header = 'Insert Party into Database';
 // Extract the post variables
 $party_name = trim($_POST['input_party_name']);
 
-//////////////////////  DEBUG ECHO
-echo '<p>Hello from insert-party.php</p>';
-foreach ($_POST as $input) {
-	echo '<li>$input: '.$input.'</li>';
-}
-echo '</ul>'
-////////////////////// END DEBUG ECHO
+// //////////////////////  DEBUG ECHO
+// echo '<p>Hello from insert-party.php</p>';
+// foreach ($_POST as $input) {
+// 	echo '<li>$input: '.$input.'</li>';
+// }
+// echo '</ul>'
+// ////////////////////// END DEBUG ECHO
 
 // Data validation
+define('PARTY_MIN', 3);
 if (!(hasLengthInRange($party_name, PARTY_MIN, 255))) {
 	echo '<p>Party name must be at least '.PARTY_MIN.' letters long.<p>';
 	insert_button("../index.php", "Back");
@@ -47,15 +48,20 @@ else {
 	$stmt = $db->prepare($query);
 	$stmt->bind_param('s', $party_name);
 	$stmt->execute();
+	// Process results
+	if ($db->affected_rows >= 0) {
+		echo '<p>'.$db->affected_rows.' party added to database.</p>';
+	}
+	else {
+		echo '<p>Unable to add state to database - probably already exists.</p>';
+	}
 
-	// Process results here
-	echo '<p>'.$db->affected_rows.' party added to database.</p>';
-	$stmt->close(); // Might be able to move this to right after the ->execute() call??
-	
 	// Close resources and close connection
-	$result->free();
+	$stmt->close(); // Might be able to move this to right after the ->execute() call??
 	$db->close();
 }
+
+insert_button("../index.php", "Back");
 // EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
 

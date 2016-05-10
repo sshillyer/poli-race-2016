@@ -39,13 +39,8 @@ else {
 		$state_abbrev = addslashes($state_abbrev);
 	}
 
-////////////////////////////////////////
-// TESTING COMPLETED UP TO THIS POINT //
-////////////////////////////////////////
-
 	// connect to DB -- returns null on failure so we exit
 	if(($db = connectToDb()) == null) {
-		echo 'Uh oh from line 56';
 		exit;
 	}
 	
@@ -55,7 +50,7 @@ else {
 	$stmt->bind_param('ss', $state_name, $state_abbrev);
 	$stmt->execute();
 
-	// Process results here
+	// Process results
 	if ($db->affected_rows >= 0) {
 		echo '<p>'.$db->affected_rows.' state added to database.</p>';	
 	}
@@ -69,7 +64,6 @@ else {
 }
 
 insert_button("../index.php", "Back");
-
 // EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
 
