@@ -15,9 +15,10 @@ $state_abbrev = strtoupper(trim($_POST['input_state_abbr'])); // trim whitespace
 
 // Data validation
 define('STATE_MIN', 3);
-$state_name_is_valid = hasLengthInRange($state_name, STATE_MIN, 255));
+define('STATE_MAX', 255);
+$state_name_is_valid = hasLengthInRange($state_name, STATE_MIN, STATE_MAX));
 
-if (!($state_abbrev_is_valid) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
+if (!($state_name_is_valid) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
 	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
 	insert_button("../index.php", "Back");
 	exit;

@@ -25,9 +25,11 @@ echo '</ul>';
 // Data Validation
 define('NAME_MIN', 3);
 define('NAME_MAX', 255);
-if (!(hasLengthInRange($candidate_fname, NAME_MIN, NAME_MAX) && hasLengthInRange($candidate_lname, NAME_MIN, NAME_MAX)) {
+$candidate_name_is_valid = (hasLengthInRange($candidate_fname, NAME_MIN, NAME_MAX) && hasLengthInRange($candidate_lname, NAME_MIN, NAME_MAX));
+
+if (!$candidate_name_is_valid) {
 	// TODO: Add this 'business' constraint to our write-up
-	echo 'Candidate\'s first and last names must be at least ' .$NAME_MIN. ' characters long each and no more than 255 characters long.';
+	echo 'Candidate\'s first and last names must be at least ' .NAME_MIN. ' characters long each and no more than 255 ' .NAME_MAX. ' long.';
 	insert_button("../index.php", "Back");
 	exit;
 }
@@ -42,8 +44,9 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null)
+	if(($db = connectToDb()) == null) {
 		exit;
+	}
 
 	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO candidate(fname, lname, party_id)  VALUES(?, ?, (SELECT p.id FROM party AS p WHERE p.name=?)';
@@ -52,14 +55,19 @@ else {
 	$stmt->execute();
 
 	// Process results here
-	echo '<p>'.$db->affected_rows.' candidate added to database.</p>';
-	$stmt->close(); // Might be able to move this to right after the ->execute() call??
+	if ($db->affected_rows >= 0) {
+		echo '<p>'.$db->affected_rows.' candidate added to database.</p>';
+	}
+	else {
+		echo '<p>Unable to add candidate to database - probably already exists.</p>';
+	}
 	
 	// Close resources and close connection
-	$result->free();
-	$db->close();	
+	$stmt->close(); // Might be able to move this to right after the ->execute() call??
+	$db->close();
 }
 
+insert_button("../index.php", "Back");
 // EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
 
