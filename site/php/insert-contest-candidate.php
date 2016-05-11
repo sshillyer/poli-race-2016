@@ -1,7 +1,7 @@
 <?php
 ini_set('display_errors', 'On');
 require_once( 'helpers.php' );
-require_once("php/Page.php");
+require_once("Page.php");
 
 $page = new Page();
 $page->header = 'Insert Candidate-Contest Data into Database';
