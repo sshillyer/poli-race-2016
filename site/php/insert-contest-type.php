@@ -14,7 +14,7 @@ $contest_type = trim($_POST['input_contest_type']);
 
 // Data validation
 define('CTYPE_MIN', 3);
-$contest_type_is_valid = hasLengthInRange($contest_type, CTYPE_MIN, 255);
+$contest_type_is_valid = has_length_in_range($contest_type, CTYPE_MIN, 255);
 if (!$contest_type_is_valid) {
 	echo '<p>Contest type must be at least '.CTYPE_MIN.' letters long.</p>';
 	insert_button("../index.php", "Back");
@@ -28,7 +28,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null) {
+	if(($db = connect_to_db()) == null) {
 		exit;
 	}
 	

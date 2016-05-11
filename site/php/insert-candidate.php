@@ -25,7 +25,7 @@ echo '</ul>';
 // Data Validation
 define('NAME_MIN', 3);
 define('NAME_MAX', 255);
-$candidate_name_is_valid = (hasLengthInRange($candidate_fname, NAME_MIN, NAME_MAX) && hasLengthInRange($candidate_lname, NAME_MIN, NAME_MAX));
+$candidate_name_is_valid = (has_length_in_range($candidate_fname, NAME_MIN, NAME_MAX) && has_length_in_range($candidate_lname, NAME_MIN, NAME_MAX));
 
 if (!$candidate_name_is_valid) {
 	// TODO: Add this 'business' constraint to our write-up
@@ -44,7 +44,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null) {
+	if(($db = connect_to_db()) == null) {
 		exit;
 	}
 

@@ -4,7 +4,7 @@ require_once( 'helpers.php' );
 require_once("php/Page.php");
 
 $page = new Page();
-$page->header = 'Insert State into Database';
+$page->header = 'Insert Contest into Database';
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
 // $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
@@ -45,7 +45,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null) {
+	if(($db = connect_to_db()) == null) {
 		exit;
 	}
 	
@@ -73,6 +73,3 @@ insert_button("../index.php", "Back");
 // $page->Display();
 
 ?>
-
-
-

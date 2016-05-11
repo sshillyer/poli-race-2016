@@ -22,7 +22,7 @@ $party_name = trim($_POST['input_party_name']);
 
 // Data validation
 define('PARTY_MIN', 3);
-$party_name_is_valid = hasLengthInRange($party_name, PARTY_MIN, 255));
+$party_name_is_valid = has_length_in_range($party_name, PARTY_MIN, 255));
 
 if (!($party_name_is_valid) {
 	echo '<p>Party name must be at least '.PARTY_MIN.' letters long.<p>';
@@ -42,7 +42,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null)
+	if(($db = connect_to_db()) == null)
 		exit;
 	
 	// Preload query then fill in the user input (prevents SQL Injection attack)

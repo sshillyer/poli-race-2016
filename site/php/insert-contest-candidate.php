@@ -59,7 +59,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null)
+	if(($db = connect_to_db()) == null)
 		exit;
 
 	// Preload query then fill in the user input (prevents SQL Injection attack)

@@ -16,7 +16,7 @@ $state_abbrev = strtoupper(trim($_POST['input_state_abbr'])); // trim whitespace
 // Data validation
 define('STATE_MIN', 3);
 define('STATE_MAX', 255);
-$state_name_is_valid = hasLengthInRange($state_name, STATE_MIN, STATE_MAX));
+$state_name_is_valid = has_length_in_range($state_name, STATE_MIN, STATE_MAX));
 
 if (!($state_name_is_valid) {  // TODO: Would rather use a regex, need to figure out the syntax for checking for, say, 3 or more [[:alpha]] in a row and double check the max string size in our database (255?)
 	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
@@ -44,7 +44,7 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connectToDb()) == null) {
+	if(($db = connect_to_db()) == null) {
 		exit;
 	}
 	

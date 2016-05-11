@@ -1,8 +1,5 @@
 <?php
 ini_set('display_errors', 'On');
-// Include any external libraries here using require_once('file.php')
-// (The idea is we would use this as a single master header file and include only the one we need across all our files)
-
 
 // @param {string} $url : Link for href attribute
 // @param {string} $lable : Text on the button
@@ -16,7 +13,7 @@ function insert_button($url, $label, $style='default') {
 // @param {int} $min : Minimum length of string (inclusive)
 // @param {int} $max : Maximum length of string (inclusive)
 // @return {bool} : true if strlen(str) in range [min..max] inclusive, false otherwise
-function hasLengthInRange($str, $min, $max) {
+function has_length_in_range($str, $min, $max) {
 	$length = strlen($str);
 	if ($length >= $min && $length <= $max)
 		return true;
@@ -27,7 +24,7 @@ function hasLengthInRange($str, $min, $max) {
 // Separated out so we can centralize the variables used to connect in a single
 // function and change all connections using one file, error handling, etc.
 // Citation: http://www.pontikis.net/blog/how-to-use-php-improved-mysqli-extension-and-why-you-should
-function connectToDb() {
+function connect_to_db() {
 	ini_set('display_errors', 'On');
 
 	$DBServer = 'oniddb.cws.oregonstate.edu';
@@ -43,12 +40,6 @@ function connectToDb() {
 		return NULL;
 	}
 
-	// if (mysqli_connect_errno()) {
-	// 	echo '<p>Error: Could not connect to the database. Please try again later.</p>';
-	// 	// TODO: probably print a button here to go back to insert page then exit
-	// 	insert_button("../index.php", "Back");
-	// 	return NULL;
-	// }
 	else
 		return $dbConnection;
 }
