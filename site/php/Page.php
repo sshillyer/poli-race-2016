@@ -33,6 +33,25 @@ class Page {
 		echo '</html>';
 	}
 
+	public function DisplayTop() {
+		echo '<html lang="en">';
+		echo '<head>';
+		$this->DisplayMeta();
+		$this->DisplayTitle();
+		$this->DisplayStyles();
+		$this->DisplayScripts();
+		echo '</head>';
+		echo '<body>';
+		$this->DisplayHeader();
+	}
+
+	public function DisplayBottom() {
+		// Print the footer and close tags out
+		$this->DisplayFooter();
+		echo '</body>';
+		echo '</html>';
+	}
+
 	public function DisplayTitle() {
 		echo '<title>'.$this->title.'</title>';
 	}
@@ -43,11 +62,14 @@ class Page {
 	}
 
 	public function DisplayStyles() {
-		echo '    <link rel="stylesheet" href="css/bootstrap.min.css">';
+		echo '    <link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">';
+
 	}
 
 	public function DisplayScripts() {
 		echo '    <script src="//code.jquery.com/jquery-2.0.2.min.js"></script>';
+		echo '    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js"></script>';
+		echo '    <script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>';
 	}
 
 	public function DisplayHeader() {

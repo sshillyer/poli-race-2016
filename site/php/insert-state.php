@@ -5,9 +5,11 @@ require_once("Page.php");
 
 $page = new Page();
 $page->header = 'Insert State into Database';
+$page->DisplayTop();
 
 // Use HEREDOC to assign the php for this particular page to the page's content variable
-// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
+ // TODO: Uncomment next line after debugging page (also its matching end market near need)
+// $page->content = <<<ENDSTATEINSERT
 
 // Extract POST variables
 $state_name = trim($_POST['input_state_name']);  // trim whitespace
@@ -66,9 +68,9 @@ else {
 	$stmt->close(); // Might be able to move this to right after the ->execute() call??
 	$db->close();
 }
-
 insert_button("../index.php", "Back");
-// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
+// ENDSTATEINSERT;
+// TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
 // $page->Display();
-
+$page->DisplayBottom();
 ?>
