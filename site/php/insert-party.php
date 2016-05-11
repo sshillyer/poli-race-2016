@@ -1,38 +1,26 @@
 <?php
 ini_set('display_errors', 'On');
-require_once( 'helpers.php' );
-require_once("Page.php");
+require_once('helpers.php');
+require_once('Page.php');
 
+// Create new Page object and display top of page content
 $page = new Page();
 $page->header = 'Insert Party into Database';
-
-// Use HEREDOC to assign the php for this particular page to the page's content variable
-// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
+$page->DisplayTop();
 
 // Extract the post variables
 $party_name = trim($_POST['input_party_name']);
 
-// //////////////////////  DEBUG ECHO
-// echo '<p>Hello from insert-party.php</p>';
-// foreach ($_POST as $input) {
-// 	echo '<li>$input: '.$input.'</li>';
-// }
-// echo '</ul>'
-// ////////////////////// END DEBUG ECHO
-
 // Data validation
 define('PARTY_MIN', 3);
-$party_name_is_valid = has_length_in_range($party_name, PARTY_MIN, 255));
+define('PARTY_MAX', 255);
+$party_name_is_valid = has_length_in_range($party_name, PARTY_MIN, PARTY_MAX);
 
-if (!($party_name_is_valid) {
+if (!$party_name_is_valid) {
 	echo '<p>Party name must be at least '.PARTY_MIN.' letters long.<p>';
 	insert_button("../index.php", "Back");
 	exit;
 }
-
-
-// Attempt to insert the new party
-//INSERT INTO party(name) VALUES([$party_name]);
 
 // Execute MySQL Query
 else {	
@@ -42,14 +30,16 @@ else {
 	}
 
 	// connect to DB -- returns null on failure so we exit
-	if(($db = connect_to_db()) == null)
+	if(($db = connect_to_db()) == null) {
 		exit;
+	}
 	
 	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO party(name) VALUES(?)';
 	$stmt = $db->prepare($query);
 	$stmt->bind_param('s', $party_name);
 	$stmt->execute();
+
 	// Process results
 	if ($db->affected_rows >= 0) {
 		echo '<p>'.$db->affected_rows.' party added to database.</p>';
@@ -64,8 +54,7 @@ else {
 }
 
 insert_button("../index.php", "Back");
-// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
-// $page->Display();
+$page->DisplayBottom();
 
 ?>
     

@@ -68,4 +68,5 @@ else {
 
 insert_button("../index.php", "Back");
 $page->DisplayBottom();
+
 ?>
