@@ -17,7 +17,7 @@ define('STATE_MIN', 3);
 define('STATE_MAX', 255);
 $state_name_is_valid = has_length_in_range($state_name, STATE_MIN, STATE_MAX);
 
-if (!($state_name_is_valid)) {
+if (!$state_name_is_valid) {
 	echo '<p>State name must be at least '.STATE_MIN.' letters long.</p>';
 	insert_button("../index.php", "Back");
 	exit;

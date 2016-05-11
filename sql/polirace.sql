@@ -67,7 +67,7 @@ CREATE TABLE IF NOT EXISTS contest_candidate (
 		ON DELETE RESTRICT,
 	FOREIGN KEY fk_contest_id(contest_id) REFERENCES contest(id)
 		ON DELETE RESTRICT,
-	UNIQUE(candidate_id, contest_id)
+	UNIQUE KEY `contest_candidate_unique` (candidate_id, contest_id)
 ) ENGINE=InnoDB;
 
 

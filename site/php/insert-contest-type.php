@@ -1,20 +1,21 @@
 <?php
 ini_set('display_errors', 'On');
-require_once( 'helpers.php' );
-require_once("Page.php");
+require_once('helpers.php');
+require_once('Page.php');
 
+// Create new Page object and display top of page content
 $page = new Page();
-$page->header = 'Insert Candidate into Database';
-
-// Use HEREDOC to assign the php for this particular page to the page's content variable
-// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
+$page->header = 'Insert Contest Type into Database';
+$page->DisplayTop();
 
 // Extract POST variables
 $contest_type = trim($_POST['input_contest_type']);
 
 // Data validation
 define('CTYPE_MIN', 3);
-$contest_type_is_valid = has_length_in_range($contest_type, CTYPE_MIN, 255);
+define('CTYPE_MAX', 255);
+$contest_type_is_valid = has_length_in_range($contest_type, CTYPE_MIN, CTYPE_MAX);
+
 if (!$contest_type_is_valid) {
 	echo '<p>Contest type must be at least '.CTYPE_MIN.' letters long.</p>';
 	insert_button("../index.php", "Back");
@@ -52,7 +53,6 @@ else {
 }
 
 insert_button("../index.php", "Back");
-// EOCONTENT; // TODO: Uncomment this line + the next line once page debugged (and matching heredoc near top)
-// $page->Display();
+$page->DisplayBottom();
 
 ?>

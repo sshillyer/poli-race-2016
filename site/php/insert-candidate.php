@@ -13,14 +13,6 @@ $candidate_fname = trim($_POST['input_candidate_fname']);
 $candidate_lname = trim($_POST['input_candidate_lname']);
 $candidate_party = trim($_POST['input_candidate_party']);
 
-////////////////////// DEBUG ECHO
-// echo '<p>Hello from insert-candidate.php</p><ul>';
-// foreach ($_POST as $input) {
-// 	echo '<li>$input: '.$input.'</li>';
-// }
-// echo '</ul>';
-////////////////////// END DEBUG ECHO
-
 // Data Validation
 define('NAME_MIN', 3);
 define('NAME_MAX', 255);

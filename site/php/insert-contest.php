@@ -3,25 +3,16 @@ ini_set('display_errors', 'On');
 require_once( 'helpers.php' );
 require_once("Page.php");
 
+// Create new Page object and display top of page content
 $page = new Page();
 $page->header = 'Insert Contest into Database';
-
-// Use HEREDOC to assign the php for this particular page to the page's content variable
-// $page->content = <<<EOCONTENT // TODO: Uncomment this after debugging page (also its matching end market near need)
+$page->DisplayTop();
 
 // Extract POST variables
 $contest_date = trim($_POST['input_contest_date']);
 $contest_state = trim($_POST['input_contest_state']);
 $contest_party = trim($_POST['input_contest_party']);
 $contest_type = trim($_POST['input_contest_contest_type']);
-/* Let's run SELECT queries to populate dropdown lists with valid states, parties, and contest_types.
-  Probably wouldn't go in this file though.  This will ensure referential integrity.  */
-
-// echo '<p>Hello from insert-contest.php</p>';
-// foreach ($_POST as $input) {
-// 	echo '<li>$input: '.$input.'</li>';
-// }
-// echo '</ul>'
 
 // Data validation
 // State, party, and type will be (ideally) selected from dropdown built
