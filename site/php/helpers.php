@@ -29,7 +29,7 @@ function connect_to_db() {
 
 	$DBServer = 'oniddb.cws.oregonstate.edu';
 	$DBUser = 'hillyers-db';
-	$DBPass = 'PASSWORD_HERE'; // TODO: Make this come from a file in non-public directory a couple levels down and add define as a constant?
+	$DBPass = '44OmOgdJsLfo4lNB'; // TODO: Make this come from a file in non-public directory a couple levels down and add define as a constant?
 	$DBName = 'hillyers-db';
 
 	@ $dbConnection =  new mysqli($DBServer, $DBUser, $DBPass, $DBName);
