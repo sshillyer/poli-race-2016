@@ -131,12 +131,12 @@ echo <<<EOCONTENT3
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest_candidate`</legend>
-                        <label for="input_contest_candidate_fname">Candidate First Name</label>
-                        <input id="input-contest-candidate-fname" type="text" name="input_contest_candidate_fname" class="form-control" required>
-                        <label for="input_contest_candidate_lname">Candidate Last Name</label>
-                        <input id="input-contest-candidate-lname" type="text" name="input_contest_candidate_lname" class="form-control" required>
-                        <label for="input_contest_candidate_state">State: </label>
-                        <input id="input-contest-candidate_state" type="text" name="input_contest_candidate_state" class="form-control" required>
+                        <label for="candidate_id">Candidate</label>
+EOCONTENT3;
+build_dropdown_menu('candidate', 'name', "SELECT id, CONCAT_WS(' ', candidate.fname, candidate.lname) AS 'name' FROM candidate");
+echo '<label for="input_contest_candidate_state">State: </label>';
+build_dropdown_menu('state', 'name');
+echo <<<EOCONTENT4
                         <label for="input_contest_candidate_votes">Votes: </label>
                         <input id="input-contest-candidate-votes" type="number" name="input_contest_candidate_votes" class="form-control">
                         <label for="input_contest_candidate_delegates">Delegates: </label>
@@ -146,7 +146,7 @@ echo <<<EOCONTENT3
                 </div>
             </form> <!-- End insert contest_candidate -->
     </div>
-EOCONTENT3;
+EOCONTENT4;
 
 $page->DisplayBottom();
 
