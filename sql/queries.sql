@@ -1,5 +1,46 @@
 -- Some queries to do
 
+-- Display list of all states in sorted order by full name:
+SELECT
+	name AS 'State', 
+	abbreviation AS 'Abbreviation'
+FROM
+	`state` AS s
+ORDER BY
+	'State' ASC
+; -- END
+
+
+-- Display all of the political parties
+SELECT
+	name as 'Party'
+FROM
+	`party` AS p
+ORDER BY
+	'Party' ASC
+; -- END
+
+-- Display types of contests used in the election process
+SELECT
+	name AS 'Contest Type'
+FROM
+	`contest_type` AS ct
+ORDER BY
+	'Contest Type' ASC
+; -- END
+
+-- Display a list of political candidates.
+SELECT 
+	CONCAT(c.`fname`, ' ', c.`lname`) AS 'Candidate',
+	p.`name` AS 'Party'
+FROM
+	`candidate` AS c
+INNER JOIN
+	`party` AS p ON c.`party_id`=p.`id`
+ORDER BY
+	'Candidate' ASC
+;
+
 -- Get basic information relating to a single candidate
 SELECT 
 	CONCAT(`fname`, ' ', `lname`) AS 'Candidate',
@@ -14,7 +55,6 @@ WHERE
 -- OUTPUT:
 -- Candidate	Party Affiliation
 -- Jeb Bush		Republican
-
 
 
 -- Get the details on all of the contests in one table
@@ -35,6 +75,7 @@ INNER JOIN
 INNER JOIN
 	`contest_type` AS `type` ON `type`.`id`=`contest`.`contest_type_id`
 ; -- TESTED: Working
+
 -- OUTPUT:
 -- Date					State		Party		Contest Type
 -- December, 31 2016	Oregon		Republican	Caucus
@@ -53,7 +94,7 @@ WHERE
 	AND
 	`party`.`name`=[partyInput]
 
-
+-- List of Voting Details: Display voting results in variosu formats.
 
 -- Retrieve all rows from contest_candidate for a particular candidate
 -- Can use this to sum up their votes and delegate count

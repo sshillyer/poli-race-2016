@@ -46,4 +46,38 @@ function build_dropdown_menu($table_name, $attribute, $alt_query=null) {
 	$db->close();
 }
 
+function run_static_query($query) {
+	if ($query == null) return;
+
+	// Connect to DB
+	if(($db = connect_to_db()) == null) {
+		return;
+	}
+
+	// Cite: stackoverflow.com/2970936 (For how to echo out nondeterministic # of rows/cols)
+	// Run query and store result in $result
+	if ($result = $db->query($query)) {
+		// Fetch the column names (field names) and print table header
+		// Cite: php.net reference manual page for mysqli_fetch_fields
+		$finfo = $result->fetch_fields();
+		echo '<table><tr>'
+		foreach ($finfo as $val) {
+			echo '<th>'.$val->name.'</th>';
+		}
+		echo '</tr>'
+
+		// Grab a $row (record) from $result one at a time until all processed
+		while ($row = $db->fetch_array($result)) {
+			// Then echo out the rows
+			echo '<tr>';
+			foreach($row as $field) {
+				echo '<td>'.htmlspecialchars($field).'</td>';
+			}
+			echo '</tr>';
+		}
+	}
+
+	$db->close();
+}
+
 ?>
