@@ -22,7 +22,7 @@ function build_dropdown_menu($table_name, $attribute) {
 	// the string. This would be a point of vulnerability if we allowed a user to use this code... might still be a risk but no other
 	// modular option I can see. --SSH
 	// Source for this point of interest: http://php.net/manual/en/mysqli.prepare.php
-	$query = 'SELECT id,'.$attribute.' FROM '.$table_name;
+	$query = 'SELECT id,'.$attribute.' FROM '.$table_name.' ORDER BY '.$attribute;
 
 	if ($stmt = $db->prepare($query)) {
 		$stmt->execute();

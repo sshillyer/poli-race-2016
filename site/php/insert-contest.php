@@ -10,14 +10,11 @@ $page->DisplayTop();
 
 // Extract POST variables
 $contest_date = trim($_POST['input_contest_date']);
-$contest_state = trim($_POST['input_contest_state']);
-$contest_party = trim($_POST['input_contest_party']);
-$contest_type = trim($_POST['input_contest_contest_type']);
+$contest_state_id = trim($_POST['state_id']);
+$contest_party_id = trim($_POST['party_id']);
+$contest_type_id = trim($_POST['contest_type_id']);
 
 // Data validation
-// State, party, and type will be (ideally) selected from dropdown built
-// using a select statement in the main form page so don't have to validate.
-// Worst case scenario if we don't do that is the insertion fails.
 $dateIsValid = true;
 
 if(!$dateIsValid) {
@@ -31,9 +28,9 @@ else {
 	// Add slashes if needed
 	if (!get_magic_quotes_gpc()) {
 		$contest_date = addslashes($contest_date);
-		$contest_state = addslashes($contest_state);
-		$contest_party = addslashes($contest_party);
-		$contest_type = addslashes($contest_type);
+		$contest_state_id = addslashes($contest_state_id);
+		$contest_party_id = addslashes($contest_party_id);
+		$contest_type_id = addslashes($contest_type_id);
 	}
 
 	// connect to DB -- returns null on failure so we exit
@@ -42,9 +39,9 @@ else {
 	}
 	
 	// Preload query then fill in the user input (prevents SQL Injection attack)
-	$query = 'INSERT INTO contest(contest_date, state_id, party_id, contest_type_id) VALUES (?, (SELECT id FROM state WHERE state.name=?), (SELECT id FROM party WHERE party.name=?), (SELECT id FROM contest_type WHERE contest_type.name=?))';
+	$query = 'INSERT INTO contest(contest_date, state_id, party_id, contest_type_id) VALUES (?, ?, ?, ?)';
 	$stmt = $db->prepare($query);
-	$stmt->bind_param('ssss', $contest_date, $contest_state, $contest_party, $contest_type);
+	$stmt->bind_param('siii', $contest_date, $contest_state_id, $contest_party_id, $contest_type_id);
 	$stmt->execute();
 
 	// Process results

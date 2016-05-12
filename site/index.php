@@ -78,7 +78,6 @@ echo <<<EOCONTENT
 EOCONTENT;
 build_dropdown_menu('party', 'name');
 echo <<<EOCONTENT2
-                        <!-- <input id="input-candidate-party" type="text" name="input_candidate_party" class="form-control" required> -->
                         <input type="submit" class="btn-default" value="Add candidate to database" class="form-control">
                     </fieldset>
                 </div>
@@ -101,12 +100,14 @@ echo <<<EOCONTENT2
                         <legend class="bg-primary">Insert into `contest`</legend>
                         <label for="input_contest_date">Contest Date: </label>
                         <input id="input-contest-date" type="date" name="input_contest_date" class="form-control" required>
-                        <label for="input_contest_state">State: </label>
-                        <input id="input-contest-state" type="text" name="input_contest_state" class="form-control" required>
-                        <label for="input_contest_party">Party: </label>
-                        <input id="input-contest-party" type="text" name="input_contest_party" class="form-control" required>
-                        <label for="input_contest_contest_type">Contest Type: </label>
-                        <input id="input-contest-contest-type" type="text" name="input_contest_contest_type" class="form-control" required>
+                        <label for="state_id">State: </label>
+EOCONTENT2;
+build_dropdown_menu('state', 'name');
+echo '<label for="party_id">Party: </label>';
+build_dropdown_menu('party', 'name');
+echo '<label for="contest_type_id">Contest Type: </label>';
+build_dropdown_menu('contest_type', 'name');
+echo <<<EOCONTENT3
                         <input type="submit" class="btn-default" value="Add contest to database" class="form-control">   
                     </fieldset>
                 </div>
@@ -145,7 +146,7 @@ echo <<<EOCONTENT2
                 </div>
             </form> <!-- End insert contest_candidate -->
     </div>
-EOCONTENT2;
+EOCONTENT3;
 
 $page->DisplayBottom();
 
