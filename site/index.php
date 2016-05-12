@@ -1,11 +1,14 @@
 <?php
 ini_set('display_errors', 'On');
 require_once("php/Page.php");
+require_once("php/select-table.php");
 
 $page = new Page();
+$page->header = 'Insert Records into Database';
+$page->DisplayTop();
 
 // Use HEREDOC syntax to assign content. No need to escape quotes and we can embed php safely
-$page->content = <<<EOCONTENT
+echo <<<EOCONTENT
             <div class="row">
             <form action="php/insert-state.php" role="form" method="post">
             <!-- This form calls the following SQL command:
@@ -18,7 +21,6 @@ $page->content = <<<EOCONTENT
                         <label for="input_state_name">State (e.g. "Oregon")</label>
                         <input id="input-state-name" type="text" name="input_state_name" class="form-control" required>
                         <label for="input_state_abbr">2-Letter Abbreviation (e.g. "OR")</label>
-                        <!-- How to call a php function ??-->
                         <input id="input-state-abbr" type="text" name="input_state_abbr" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add state to database" class="form-control">
                     </fieldset>
@@ -57,7 +59,6 @@ $page->content = <<<EOCONTENT
                 </div>
             </form> <!-- End contest-type form -->
         </div>
-
         <div class="row">
             <form action="php/insert-candidate.php" role="form" method="post">
             <!-- This form calls the following SQL command:
@@ -73,8 +74,11 @@ $page->content = <<<EOCONTENT
                         <input id="input-candidate-fname" type="text" name="input_candidate_fname" class="form-control" required>
                         <label for="input_candidate_lname">Last Name: </label>
                         <input id="input-candidate-lname" type="text" name="input_candidate_lname" class="form-control" required>
-                        <label for="input_candidate_party">Party: </label>
-                        <input id="input-candidate-party" type="text" name="input_candidate_party" class="form-control" required>
+                        <label for="candidate_id">Party: </label>
+EOCONTENT;
+build_dropdown_menu('party', 'name');
+echo <<<EOCONTENT2
+                        <!-- <input id="input-candidate-party" type="text" name="input_candidate_party" class="form-control" required> -->
                         <input type="submit" class="btn-default" value="Add candidate to database" class="form-control">
                     </fieldset>
                 </div>
@@ -141,9 +145,8 @@ $page->content = <<<EOCONTENT
                 </div>
             </form> <!-- End insert contest_candidate -->
     </div>
-EOCONTENT;
+EOCONTENT2;
 
-$page->header = 'Insert Records into Database';
-$page->Display();
+$page->DisplayBottom();
 
 ?>

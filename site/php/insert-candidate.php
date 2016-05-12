@@ -11,7 +11,7 @@ $page->DisplayTop();
 // Extract POST variables
 $candidate_fname = trim($_POST['input_candidate_fname']);
 $candidate_lname = trim($_POST['input_candidate_lname']);
-$candidate_party = trim($_POST['input_candidate_party']);
+$candidate_party_id = trim($_POST['party_id']);
 
 // Data Validation
 define('NAME_MIN', 3);
@@ -31,7 +31,7 @@ else {
 	if (!get_magic_quotes_gpc()) {
 		$candidate_fname = addslashes($candidate_fname);
 		$candidate_lname = addslashes($candidate_lname);
-		$candidate_party = addslashes($candidate_party);
+		$candidate_party_id = addslashes($candidate_party_id);
 	}
 
 	// connect to DB -- returns null on failure so we exit
@@ -40,9 +40,9 @@ else {
 	}
 
 	// Preload query then fill in the user input (prevents SQL Injection attack)
-	$query = "INSERT INTO candidate(fname, lname, party_id) VALUES(?, ?, (SELECT party.id FROM party WHERE party.name=?))";
+	$query = "INSERT INTO candidate(fname, lname, party_id) VALUES(?, ?, ?)";
 	$stmt = $db->prepare($query);
-	$stmt->bind_param('sss', $candidate_fname, $candidate_lname, $candidate_party);
+	$stmt->bind_param('ssi', $candidate_fname, $candidate_lname, $candidate_party_id);
 	$stmt->execute();
 
 	// Process results here
