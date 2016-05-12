@@ -4,9 +4,56 @@
 -- --------------------------------------------------------------------------------------------------
 INSERT INTO state(name, abbreviation)
 	VALUES
-		("Oregon", "OR"),
+		("Alabama", "AL"),
+		("Alaska", "AK"),
+		("Arizona", "AZ"),
+		("Arkansas", "AR"),
 		("California", "CA"),
-		("Washington", "WA")
+		("Colorado", "CO"),
+		("Connecticut", "CT"),
+		("Delaware", "DE"),
+		("Florida", "FL"),
+		("Georgia", "GA"),
+		("Hawaii", "HI"),
+		("Idaho", "ID"),
+		("Illinois", "IL"),
+		("Indiana", "IN"),
+		("Iowa", "IA"),
+		("Kansas", "KS"),
+		("Kentucky", "KY"),
+		("Louisiana", "LA"),
+		("Maine", "ME"),
+		("Maryland", "MD"),
+		("Massachusetts", "MA"),
+		("Michigan", "MI"),
+		("Minnesota", "MN"),
+		("Mississippi", "MS"),
+		("Missouri", "MO"),
+		("Montana", "MT"),
+		("Nebraska", "NE"),
+		("Nevada", "NV"),
+		("New Hampshire", "NH"),
+		("New Jersey", "NJ"),
+		("New Mexico", "NM"),
+		("New York", "NY"),
+		("North Carolina", "NC"),
+		("North Dakota", "ND"),
+		("Ohio", "OH"),
+		("Oklahoma", "OK"),
+		("Oregon", "OR"),
+		("Pennsylvania", "PA"),
+		("Rhode Island", "RI"),
+		("South Carolina", "SC"),
+		("South Dakota", "SD"),
+		("Tennessee", "TN"),
+		("Texas", "TX"),
+		("Utah", "UT"),
+		("Vermont", "VT"),
+		("Virginia", "VA"),
+		("Washington", "WA"),
+		("West Virginia", "WV"),
+		("Wisconsin", "WI"),
+		("Wyoming", "WY")
 ;
 
 
@@ -14,15 +61,27 @@ INSERT INTO state(name, abbreviation)
 INSERT INTO party(name)
 	VALUES
 		("Democrat"),
-		("Republican")
+		("Republican"),
+		("Independent"),
+		("Libertarian"),
+		("Green"),
+		("Constitution"),
+		("American Freedom")
 ;
 
 
 -- --------------------------------------------------------------------------------------------------
+-- More can be found here: http://www.nytimes.com/interactive/2016/us/elections/2016-presidential-candidates.html?_r=0
 INSERT INTO candidate(fname, lname, party_id)
 	VALUES
 		("Jeb", "Busch", (SELECT id FROM party WHERE party.name="Republican")),
-		("Hillary", "Clinton", (SELECT id FROM party WHERE party.name="Democrat"))
+		("Hillary", "Clinton", (SELECT id FROM party WHERE party.name="Democrat")),
+		("Donald", "Trump", (SELECT id FROM party WHERE party.name="Republican"))
+		("Bernie", "Sanders", (SELECT id FROM party WHERE party.name="Democrat")),
+		("Bob", "Whitacker", (SELECT id FROM party WHERE party.name="American Freedom")),
+		("Tom", "Bowie", (SELECT id FROM party WHERE party.name="American Freedom")),
+		("Darrell", "Castle", (SELECT id FROM party WHERE party.name="Constitution")),
+		("Scott", "Bradley", (SELECT id FROM party WHERE party.name="Constitution"))
 ;
 
 
