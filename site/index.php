@@ -18,6 +18,7 @@ $page->content = <<<EOCONTENT
                         <label for="input_state_name">State (e.g. "Oregon")</label>
                         <input id="input-state-name" type="text" name="input_state_name" class="form-control" required>
                         <label for="input_state_abbr">2-Letter Abbreviation (e.g. "OR")</label>
+                        <!-- How to call a php function ??-->
                         <input id="input-state-abbr" type="text" name="input_state_abbr" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add state to database" class="form-control">
                     </fieldset>
