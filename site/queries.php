@@ -18,7 +18,7 @@ echo <<<EOCONTENT
 	<li><a href="php/select-contest-types.php">List of Contest Types: Display types of contests used in the election process</a></li>
 	<li><a href="php/select-candidates.php">List of Candidates: Display a list of political candidates.</a></li>
 	<li><a href="php/select-contests.php">List of Contests: Display the contests.</a></li>
-	<li><a href="php/select-contest-candidate.php">List of Voting Details: Display voting results in variosu formats.</a></li>
+	<li><a href="php/select-contest-candidate.php">List of Voting Details: Display voting results (Calculates SUM of votes for all events grouped by candidate).</a></li>
 	</ul>
 EOCONTENT;
 

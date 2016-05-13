@@ -6,7 +6,7 @@ require_once("Page.php");
 
 // Create new Page object and display top of page content
 $page = new Page();
-$page->header = 'Display All Contest Types';
+$page->header = 'Display All Candidates';
 $page->DisplayTop();
 
 build_table_from_query("SELECT 
