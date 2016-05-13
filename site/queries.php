@@ -13,20 +13,6 @@ insert_button("index.php", "Back to Insert Page");
 // TODO: Make these links to individual php pages that process each kind of request for now. Could alternatively route them all into a single .php file that uses a switch case in the body to run the relevant queries??
 echo <<<EOCONTENT
 <div class="row">
-<p>This will be deprecated once dropdown and select-route.php done</p>
-	<ul>Retrieve data from a table:
-	<li><a href="php/select-states.php">List of States: Display state name and abbreviations</a></li>
-	<li><a href="php/select-parties.php">List of Political Parties: Display names of political parties</a></li>
-	<li><a href="php/select-contest-types.php">List of Contest Types: Display types of contests used in the election process</a></li>
-	<li><a href="php/select-candidates.php">List of Candidates: Display a list of political candidates.</a></li>
-	<li><a href="php/select-contests.php">List of Contests: Display the contests.</a></li>
-	<li><a href="php/select-contest-candidate.php">List of Voting Details: Display voting results (Calculates SUM of votes for all events grouped by candidate).</a></li>
-	</ul>
-</div> <!-- End row -->
-
-<div class="row">
-	<p>Going to make an dropdown list of queries and a submit button that routes to select-route.php; this will pass in a variable that tells it which query to run and will render the page.</p>
-	
 	<form action="php/select-route.php" role="form" method="post">
 	<div class="form-group">
 		<fieldset>

@@ -9,9 +9,10 @@ $page = new Page();
 $page->header = 'Display All Parties';
 $page->DisplayTop();
 
-// Extract the query type
+// Extract the query type. 
 $query_type = ($_POST['query_selection']);
-echo $query_type.' was passed in.';
+
+
 switch ($query_type) {
 	// Display States
 	case "all_states":
@@ -84,8 +85,10 @@ switch ($query_type) {
 			ON `details`.`candidate_id`=c.`id`
 		GROUP BY
 			`details`.`candidate_id`";
+
 		break;
 
+	// Additional query routes can be below here :)
 }
 
 
