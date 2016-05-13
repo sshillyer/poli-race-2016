@@ -44,6 +44,7 @@ function build_dropdown_menu($table_name, $attribute, $alt_query=null) {
 	$db->close();
 }
 
+
 // @param {string} $query : A mysql query without null-terminating ;
 // Builds an html table with column headers and all results on own row.
 function build_table_from_query($query) {

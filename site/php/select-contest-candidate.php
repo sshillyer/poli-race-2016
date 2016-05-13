@@ -23,9 +23,8 @@ INNER JOIN
 	`contest_candidate` AS `details`
 	ON `details`.`candidate_id`=c.`id`
 GROUP BY
-	`details`.`candidate_id`  -- Where clause might need to be before the group by clause??
-;
-");
+	`details`.`candidate_id`
+	");
 
 insert_button("../queries.php", "Select Different Query");
 insert_button("../index.php", "Insert More Data");
