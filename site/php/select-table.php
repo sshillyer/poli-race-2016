@@ -1,8 +1,6 @@
 <?php
 ini_set('display_errors', 'On');
-
 require_once('helpers.php');
-
 
 // @param {string} $table_name : name of table to select from
 // @param {string} $attribute : the column to select to retreive a label from
@@ -46,7 +44,9 @@ function build_dropdown_menu($table_name, $attribute, $alt_query=null) {
 	$db->close();
 }
 
-function run_static_query($query) {
+// @param {string} $query : A mysql query without null-terminating ;
+// Builds an html table with column headers and all results on own row.
+function build_table_from_query($query) {
 	if ($query == null) return;
 
 	// Connect to DB
@@ -66,9 +66,8 @@ function run_static_query($query) {
 		}
 		echo '</tr>'
 
-		// Grab a $row (record) from $result one at a time until all processed
+		// retrieve each record and print a row with each value in a column
 		while ($row = $db->fetch_array($result)) {
-			// Then echo out the rows
 			echo '<tr>';
 			foreach($row as $field) {
 				echo '<td>'.htmlspecialchars($field).'</td>';
@@ -76,7 +75,6 @@ function run_static_query($query) {
 			echo '</tr>';
 		}
 	}
-
 	$db->close();
 }
 

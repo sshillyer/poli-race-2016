@@ -10,6 +10,7 @@ $page->DisplayTop();
 
 insert_button("index.php", "Insert Links");
 
+// TODO: Make these links to individual php pages that process each kind of request for now. Could alternatively route them all into a single .php file that uses a switch case in the body to run the relevant queries??
 echo <<<EOCONTENT
 	Retrieve data from a table:
 	List of States: Display state name and abbreviations
