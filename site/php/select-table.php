@@ -60,20 +60,22 @@ function build_table_from_query($query) {
 		// Fetch the column names (field names) and print table header
 		// Cite: php.net reference manual page for mysqli_fetch_fields
 		$finfo = $result->fetch_fields();
-		echo '<table><tr>'
+		echo '<table class="table-striped table-bordered"><tr>';
 		foreach ($finfo as $val) {
 			echo '<th>'.$val->name.'</th>';
 		}
-		echo '</tr>'
+		echo '</tr>';
 
 		// retrieve each record and print a row with each value in a column
-		while ($row = $db->fetch_array($result)) {
+		while ($row = $result->fetch_array(MYSQLI_NUM)) {
 			echo '<tr>';
 			foreach($row as $field) {
 				echo '<td>'.htmlspecialchars($field).'</td>';
 			}
 			echo '</tr>';
 		}
+
+		$result->free();
 	}
 	$db->close();
 }

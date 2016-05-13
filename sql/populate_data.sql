@@ -76,7 +76,7 @@ INSERT INTO candidate(fname, lname, party_id)
 	VALUES
 		("Jeb", "Busch", (SELECT id FROM party WHERE party.name="Republican")),
 		("Hillary", "Clinton", (SELECT id FROM party WHERE party.name="Democrat")),
-		("Donald", "Trump", (SELECT id FROM party WHERE party.name="Republican"))
+		("Donald", "Trump", (SELECT id FROM party WHERE party.name="Republican")),
 		("Bernie", "Sanders", (SELECT id FROM party WHERE party.name="Democrat")),
 		("Bob", "Whitacker", (SELECT id FROM party WHERE party.name="American Freedom")),
 		("Tom", "Bowie", (SELECT id FROM party WHERE party.name="American Freedom")),
