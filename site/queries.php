@@ -8,7 +8,7 @@ $page = new Page();
 $page->header = 'Query the Database';
 $page->DisplayTop();
 
-insert_button("index.php", "Back to Insert Page");
+insert_button("index.php", "Insert Records into Database");
 
 // TODO: Make these links to individual php pages that process each kind of request for now. Could alternatively route them all into a single .php file that uses a switch case in the body to run the relevant queries??
 echo <<<EOCONTENT

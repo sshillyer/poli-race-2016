@@ -3,18 +3,17 @@ ini_set('display_errors', 'On');
 require_once("php/Page.php");
 require_once("php/select-table.php");
 
+// Create new Page object and display top of page content
 $page = new Page();
 $page->header = 'Insert Records into Database';
 $page->DisplayTop();
 
+insert_button("queries.php", "Query the Database");
+
 // Use HEREDOC syntax to assign content. No need to escape quotes and we can embed php safely
 echo <<<EOCONTENT
-            <div class="row">
+        <div class="row">
             <form action="php/insert-state.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-            INSERT INTO state(name, abbreviation)
-                VALUES([inputName], [inputAbbreviation]);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `state`</legend>
@@ -29,10 +28,6 @@ echo <<<EOCONTENT
         </div>
         <div class="row">    
             <form action="php/insert-party.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-            INSERT INTO party(name)
-                VALUES([inputName]);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `party`</legend>
@@ -45,10 +40,6 @@ echo <<<EOCONTENT
         </div>
         <div class="row">            
             <form action="php/insert-contest-type.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-            INSERT INTO contest_type(name)
-                VALUES([inputTypeName]);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest_type`</legend>
@@ -61,12 +52,6 @@ echo <<<EOCONTENT
         </div>
         <div class="row">
             <form action="php/insert-candidate.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-            INSERT INTO candidate(fname, lname, party_id)
-            	VALUES([inputFname], [inputLname], 
-            		(SELECT p.id FROM party AS p WHERE p.name=[inputPartyName])
-        	);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `candidate`</legend>
@@ -86,15 +71,6 @@ echo <<<EOCONTENT2
 
         <div class="row">            
             <form action="php/insert-contest.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-            INSERT INTO contest(contest_date, state_id, party_id, contest_type_id)
-            	VALUES
-            		(	[inputContestDate], 
-            			(SELECT id FROM state WHERE state.name=[inputContestState]), 
-            			(SELECT id FROM party WHERE party.name=[inputContestParty]),
-            			(SELECT id FROM contest_type WHERE contest_type.name=[inputContestType]) 
-            		);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest`</legend>
@@ -116,18 +92,6 @@ echo <<<EOCONTENT3
 
         <div class="row">            
             <form action="php/insert-contest-candidate.php" role="form" method="post">
-            <!-- This form calls the following SQL command:
-        INSERT INTO contest_candidate(candidate_id, contest_id, vote_count, delegate_count)
-        	VALUES
-        	(	(SELECT id FROM candidate WHERE candidate.fname=[inputFName] AND candidate.lname=[inputLName]),
-        		(SELECT id FROM contest 
-        			WHERE contest.state_id=(SELECT id FROM state WHERE state.name=[inputState])
-        				AND 
-        			contest.party_id=(SELECT id FROM party WHERE party.name=[inputParty])
-        		),
-        		[inputVoteCount],
-        		[inputDelegateCount]);
-            -->
                 <div class="form-group">
                     <fieldset>
                         <legend class="bg-primary">Insert into `contest_candidate`</legend>
