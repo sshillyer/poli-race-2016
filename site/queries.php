@@ -33,6 +33,17 @@ echo <<<EOCONTENT
 		</fieldset>
 	</div> <!-- End form-group -->
 	</form>
+
+	<form action="php/select-search.php" role="form" method="post">
+	<div class="form-group">
+		<fieldset>
+			<legend class="bg-primary">Select Query to Run</legend>
+			<label for="input_search_name">Search for a candidate by last name:</label>
+			<input id="input-search-name" type="text" name="input_search_name" class="form-control" required>
+			<input type="submit" class="btn-default" value="Search by last name" class="form-control">
+		</fieldset>
+	</div> <!-- End form-group -->
+	</form>
 </div> <!-- End row -->
 EOCONTENT;
 
