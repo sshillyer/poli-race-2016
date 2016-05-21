@@ -10,7 +10,7 @@ $page->DisplayTop();
 
 insert_button("index.php", "Insert Records into Database");
 
-// TODO: Make these links to individual php pages that process each kind of request for now. Could alternatively route them all into a single .php file that uses a switch case in the body to run the relevant queries??
+// Dropdown form to route people using select-route.php, and a simple search form for a standlone search feature.
 echo <<<EOCONTENT
 <div class="row">
 	<form action="php/select-route.php" role="form" method="post">
@@ -37,14 +37,5 @@ echo <<<EOCONTENT
 EOCONTENT;
 
 $page->DisplayBottom();
-
-// States:
-
-
-
-
-
-
-
 
 ?>
