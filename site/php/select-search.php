@@ -23,12 +23,12 @@ if (!$lname) {
 // Execute MySQL Query
 else {	
 	// Add slashes if needed
-	// if (!get_magic_quotes_gpc()) {
-	// 	$lname = addslashes($lname);
-	// }
+	if (!get_magic_quotes_gpc()) {
+		$lname = addslashes($lname);
+	}
 
-	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = "SELECT CONCAT(c.`fname`, ' ', c.`lname`) AS 'Candidate', p.`name` AS 'Party' FROM `candidate` AS c INNER JOIN `party` AS p ON c.`party_id`=p.`id` WHERE c.`lname`='$lname' ORDER BY 'Candidate' ASC";
+	
 	build_table_from_query($query);
 
 }
