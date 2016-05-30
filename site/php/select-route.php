@@ -76,7 +76,8 @@ switch ($query_type) {
 					DATE(`contest`.`contest_date`) AS `Date`,
 					`state`.`name` AS `State`,
 					`party`.`name` AS `Party`,
-					`type`.`name` AS `Contest Type`
+					`type`.`name` AS `Contest Type`,
+					`contest`.`delegates` AS `Available Delegates`
 				FROM
 				  	`contest`
 				INNER JOIN
