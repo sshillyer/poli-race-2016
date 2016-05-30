@@ -13,6 +13,7 @@ $contest_date = trim($_POST['input_contest_date']);
 $contest_state_id = trim($_POST['state_id']);
 $contest_party_id = trim($_POST['party_id']);
 $contest_type_id = trim($_POST['contest_type_id']);
+$contest_delegates = trim($_POST['delegates']);
 
 // Data validation
 $dateIsValid = true;
@@ -31,6 +32,7 @@ else {
 		$contest_state_id = addslashes($contest_state_id);
 		$contest_party_id = addslashes($contest_party_id);
 		$contest_type_id = addslashes($contest_type_id);
+		$contest_delegates = addslashes($contest_delegates);
 	}
 
 	// connect to DB -- returns null on failure so we exit
@@ -39,9 +41,9 @@ else {
 	}
 	
 	// Preload query then fill in the user input (prevents SQL Injection attack)
-	$query = 'INSERT INTO contest(contest_date, state_id, party_id, contest_type_id) VALUES (?, ?, ?, ?)';
+	$query = 'INSERT INTO contest(contest_date, state_id, party_id, contest_type_id, delegates) VALUES (?, ?, ?, ?, ?)';
 	$stmt = $db->prepare($query);
-	$stmt->bind_param('siii', $contest_date, $contest_state_id, $contest_party_id, $contest_type_id);
+	$stmt->bind_param('siii', $contest_date, $contest_state_id, $contest_party_id, $contest_type_id, $contest_delegates);
 	$stmt->execute();
 
 	// Process results

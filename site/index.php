@@ -84,6 +84,8 @@ build_dropdown_menu('party', 'name');
 echo '<label for="contest_type_id">Contest Type: </label>';
 build_dropdown_menu('contest_type', 'name');
 echo <<<EOCONTENT3
+                        <label for="input_contest_delegates">Delegates Available: </label>
+                        <input id="input-contest-delegates" type="number" name="input_contest_delegates" class="form-control" required>
                         <input type="submit" class="btn-default" value="Add contest to database" class="form-control">   
                     </fieldset>
                 </div>

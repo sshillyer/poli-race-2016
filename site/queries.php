@@ -25,9 +25,8 @@ echo <<<EOCONTENT
 				<option value="all_candidates">Display Political Candidates</option>
 				<option value="all_contests">Display Contest Events</option>
 				<option value="all_contest_candidates">Display Voting Details</option>
-				<option value="">PLACEHOLDER</option>
-				<option value="">PLACEHOLDER</option>
-				<option value="">PLACEHOLDER</option>
+				<option value="all_contest_delegates">Display Number of Delegates Available per Contest</option>
+				<option value="most_recent_wins">Display Candidates' Most Recent Wins</option>
 			</select>
 			<input type="submit" class="btn-default" value="Run Query" class="form-control">
 		</fieldset>
