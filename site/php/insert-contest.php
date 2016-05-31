@@ -43,7 +43,7 @@ else {
 	// Preload query then fill in the user input (prevents SQL Injection attack)
 	$query = 'INSERT INTO contest(contest_date, state_id, party_id, contest_type_id, delegates) VALUES (?, ?, ?, ?, ?)';
 	$stmt = $db->prepare($query);
-	$stmt->bind_param('siii', $contest_date, $contest_state_id, $contest_party_id, $contest_type_id, $contest_delegates);
+	$stmt->bind_param('siiii', $contest_date, $contest_state_id, $contest_party_id, $contest_type_id, $contest_delegates);
 	$stmt->execute();
 
 	// Process results

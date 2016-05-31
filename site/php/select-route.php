@@ -6,7 +6,7 @@ require_once("Page.php");
 
 // Create new Page object and display top of page content
 $page = new Page();
-$page->header = 'Display All Parties';
+$page->header = 'Query Results';
 $page->DisplayTop();
 
 // Extract the query type. 
@@ -126,7 +126,7 @@ switch ($query_type) {
 				INNER JOIN
 					`contest` AS c ON s.`id` = c.`state_id`
 				INNER JOIN
-					`party` AS p ON c.`party_id` = p.`id`;
+					`party` AS p ON c.`party_id` = p.`id`
 				INNER JOIN
 					(
 					SELECT
@@ -144,71 +144,71 @@ switch ($query_type) {
 	// Display each candidate's most recent win
 	case "most_recent_wins":
 		$query =
-				"SELECT
-					CONCAT(cn.`fname`, ' ', cn.`lname`) AS `Winner`,
-					pty.`name` AS `Party`,
-					st.`name` AS `State`,
-					ct.`name` AS `Event`,
-					DATE(`recent_win`.`contest_date`) AS `Date`,
-					ctc.`delegate_count` AS `Delegates Won`,
-					ctc.`vote_count` AS `Votes Received`,
-					cs.`delegates` AS `Total Delegates`
-				FROM
-					(
-					SELECT
-						can.`id` AS `candidate_id`,
-						MAX(c.`contest_date`) AS `contest_date`
-					FROM
-						(
-						SELECT
-							con.`id` AS `contest_id`,
-							MAX(conca.`delegate_count`) AS `max_dels`
-						FROM
-							`contest` AS con
-						INNER JOIN
-							`contest_candidate` AS conca ON conca.`contest_id` = con.`id`
-						GROUP BY
-							con.`id`
-						) `max_per_contest`
-					INNER JOIN
-						`contest_candidate` AS cc ON cc.`contest_id` = `max_per_contest`.`contest_id`
-					INNER JOIN
-						`candidate` AS can ON can.`id` = cc.`candidate_id`
-					INNER JOIN
-						`contest` AS c ON c.`id` = cc.`contest_id`
-					WHERE
-						cc.`delegate_count` = `max_per_contest`.`max_dels`
-					GROUP BY
-						`candidate_id`
-					) `recent_win`
-				INNER JOIN
-					`candidate` AS cn ON cn.`id` = `recent_win`.`candidate_id`
-				INNER JOIN
-					`contest_candidate` AS ctc ON ctc.`candidate_id` = cn.`id`
-				INNER JOIN
-					`contest` AS cs ON cs.`id` = ctc.`contest_id`
-									AND `recent_win`.`contest_date` = cs.`contest_date`
-				INNER JOIN
-					`contest_type` AS ct ON ct.`id` = cs.`contest_type_id`
-				INNER JOIN
-					`party` AS pty ON pty.`id` = cn.`party_id`
-				INNER JOIN
-					`state` AS st ON st.`id` = cs.`state_id`
-				INNER JOIN
-					(
-					SELECT
-						con.`id` AS `contest_id`,
-						MAX(conca.`delegate_count`) AS `max_dels`
-					FROM
-						`contest` AS con
-					INNER JOIN
-						`contest_candidate` AS conca ON conca.`contest_id` = con.`id`
-					GROUP BY
-						con.`id`
-					) `max_per_contest` ON `max_per_contest`.`contest_id` = cs.`id`
-										AND `max_per_contest`.`max_dels` = ctc.`delegate_count`
-				ORDER BY
-					`Party` ASC";
+"SELECT
+	CONCAT(cn.`fname`, ' ', cn.`lname`) AS `Winner`,
+	pty.`name` AS `Party`,
+	st.`name` AS `State`,
+	ct.`name` AS `Event`,
+	DATE(`recent_win`.`contest_date`) AS `Date`,
+	ctc.`delegate_count` AS `Delegates Won`,
+	ctc.`vote_count` AS `Votes Received`,
+	cs.`delegates` AS `Total Delegates`
+FROM
+	(
+	SELECT
+		can.`id` AS `candidate_id`,
+		MAX(c.`contest_date`) AS `contest_date`
+	FROM
+		(
+		SELECT
+			con.`id` AS `contest_id`,
+			MAX(conca.`delegate_count`) AS `max_dels`
+		FROM
+			`contest` AS con
+		INNER JOIN
+			`contest_candidate` AS conca ON conca.`contest_id` = con.`id`
+		GROUP BY
+			con.`id`
+		) `max_per_contest`
+	INNER JOIN
+		`contest_candidate` AS cc ON cc.`contest_id` = `max_per_contest`.`contest_id`
+	INNER JOIN
+		`candidate` AS can ON can.`id` = cc.`candidate_id`
+	INNER JOIN
+		`contest` AS c ON c.`id` = cc.`contest_id`
+	WHERE
+		cc.`delegate_count` = `max_per_contest`.`max_dels`
+	GROUP BY
+		`candidate_id`
+	) `recent_win`
+INNER JOIN
+	`candidate` AS cn ON cn.`id` = `recent_win`.`candidate_id`
+INNER JOIN
+	`contest_candidate` AS ctc ON ctc.`candidate_id` = cn.`id`
+INNER JOIN
+	`contest` AS cs ON cs.`id` = ctc.`contest_id`
+					AND `recent_win`.`contest_date` = cs.`contest_date`
+INNER JOIN
+	`contest_type` AS ct ON ct.`id` = cs.`contest_type_id`
+INNER JOIN
+	`party` AS pty ON pty.`id` = cn.`party_id`
+INNER JOIN
+	`state` AS st ON st.`id` = cs.`state_id`
+INNER JOIN
+	(
+	SELECT
+		con.`id` AS `contest_id`,
+		MAX(conca.`delegate_count`) AS `max_dels`
+	FROM
+		`contest` AS con
+	INNER JOIN
+		`contest_candidate` AS conca ON conca.`contest_id` = con.`id`
+	GROUP BY
+		con.`id`
+	) `max_per_contest` ON `max_per_contest`.`contest_id` = cs.`id`
+						AND `max_per_contest`.`max_dels` = ctc.`delegate_count`
+ORDER BY
+	`Party` ASC";
 }
 
 
